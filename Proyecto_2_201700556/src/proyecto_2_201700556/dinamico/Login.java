@@ -79,7 +79,7 @@ public class Login
                
                 
                  Archivo m=new Archivo();
-                 m.Leer();
+                 m.Estudiantes_Leer();
                 
 
                 
