@@ -12,7 +12,7 @@ package proyecto_2_201700556;
 public class Catedratico extends Usuario
 {
     Catedratico siguiente;
-public Catedratico (String carnet,int DPI,String nombre,String correo,String direccion,int Credito,String password)
+public Catedratico (String carnet,String DPI,String nombre,String correo,String direccion,int Credito,String password)
 {
     this.carnet=carnet;
     this.DPI=DPI;
@@ -33,11 +33,11 @@ public Catedratico (String carnet,int DPI,String nombre,String correo,String dir
         this.carnet = carnet;
     }
 
-    public int getDPI() {
+    public String getDPI() {
         return DPI;
     }
 
-    public void setDPI(int DPI) {
+    public void setDPI(String DPI) {
         this.DPI = DPI;
     }
 
