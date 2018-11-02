@@ -11,10 +11,11 @@ package proyecto_2_201700556;
  */
 public class Curso 
 {
-    // prueba  numero uno
-    
-    
-    
-    //sdasdas
-    //prueba 1 
+ int codigo;
+ String nombre;
+ String catedratico;
+ int credito;
+ boolean laboratorio;
+ 
+         
 }
