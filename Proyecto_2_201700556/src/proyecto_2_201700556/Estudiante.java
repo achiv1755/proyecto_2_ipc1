@@ -5,7 +5,8 @@ public class Estudiante extends     Usuario
 {
  
  Estudiante siguiente;
-public Estudiante (String carnet,int DPI,String nombre,String correo,String direccion,int Credito,String password)
+ Estudiante anterior;
+public Estudiante (String carnet,String DPI,String nombre,String correo,String direccion,int Credito,String password)
 {
     this.carnet=carnet;
     this.DPI=DPI;
@@ -15,6 +16,7 @@ public Estudiante (String carnet,int DPI,String nombre,String correo,String dire
     this .Credito=Credito;
     this .password=password;
     siguiente=null;
+    anterior=null;
 }
 
     public String getCarnet() {
@@ -25,11 +27,11 @@ public Estudiante (String carnet,int DPI,String nombre,String correo,String dire
         this.carnet = carnet;
     }
 
-    public int getDPI() {
+        public String getDPI() {
         return DPI;
     }
 
-    public void setDPI(int DPI) {
+    public void setDPI(String DPI) {
         this.DPI = DPI;
     }
 
@@ -73,8 +75,19 @@ public Estudiante (String carnet,int DPI,String nombre,String correo,String dire
         this.password = password;
     }
 
-
-
+ Estudiante obtenerSiguiente()
+    {
+    return  siguiente;
+    
+    }
+   
+   public void enlazar_siguiente(Estudiante siguiente){this.siguiente=siguiente;}
+    Estudiante obtenerAnterior()
+    {
+    
+    return anterior;
+    }
+public void enlazar_anterior(Estudiante anterior){this.anterior=anterior;}
 
 
 }
