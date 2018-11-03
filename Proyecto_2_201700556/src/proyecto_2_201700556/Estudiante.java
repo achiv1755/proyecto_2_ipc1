@@ -4,8 +4,8 @@ package proyecto_2_201700556;
 public class Estudiante extends     Usuario
 {
  
- Estudiante siguiente;
- Estudiante anterior;
+public  Estudiante siguiente;
+public Estudiante anterior;
 public Estudiante (String carnet,String DPI,String nombre,String correo,String direccion,int Credito,String password)
 {
     this.carnet=carnet;
