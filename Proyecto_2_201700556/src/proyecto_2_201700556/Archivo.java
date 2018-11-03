@@ -72,14 +72,33 @@ public Archivo ()
     BufferedReader br;
   javax.swing.JFileChooser j=new javax.swing.JFileChooser();
        j.showOpenDialog(j);
-       
-       
+     
       
     try
-    {
-         archivo=j.getSelectedFile().getAbsolutePath();
-    archivo_guardado=new File(archivo);
+    {  if(j.getSelectedFile()!=null){
+        
+        
+        
        
+         
+         archivo=j.getSelectedFile().getAbsolutePath();
+         
+         
+         String aux_archivo=archivo;
+             
+         String []verificar= aux_archivo.split("\\.");
+         
+              
+              
+         
+                if (verificar[1].equals("ipc_c")) {
+                             
+         
+         
+         
+         
+    archivo_guardado=new File(archivo);
+        
     fr=new FileReader(archivo_guardado);
     br=new BufferedReader(fr);
         
@@ -119,7 +138,9 @@ public Archivo ()
                if (  0!=archivo_guardado.length()) 
             {
               
-               JOptionPane.showMessageDialog(null, "carga completa");  
+               JOptionPane.showMessageDialog(null, "carga completa");
+               Administrador Administrador=new Administrador();
+    Administrador.add();
             }
             else{JOptionPane.showMessageDialog(null, "no hay datos que cargar");  }
             
@@ -133,8 +154,10 @@ public Archivo ()
     
   
     
-    
-}catch (Exception c){JOptionPane.showMessageDialog(null, "archivo no valido"+ c);}}
+                }else{JOptionPane.showMessageDialog(null, "Archivo no valido");Administrador Administrador=new Administrador();Administrador.add();}}   else{Administrador Administrador=new Administrador();
+    Administrador.add();}
+}catch (Exception c){JOptionPane.showMessageDialog(null, "archivo no valido"+ c);Administrador Administrador=new Administrador();
+    Administrador.add();}}
 
 
 
