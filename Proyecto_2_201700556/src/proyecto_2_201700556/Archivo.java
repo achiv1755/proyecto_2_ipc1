@@ -12,14 +12,15 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
+import proyecto_2_201700556.dinamico.Administrador;
 
 
 public class Archivo 
 {   String archivo;
       Estudiante aux; 
-     static Estudiante  estudiante_primero;
-     static   Estudiante estudiante_ultimo;
-     static int estudiante_tamano;
+    public   static Estudiante  estudiante_primero;
+    public static   Estudiante estudiante_ultimo;
+     public static int estudiante_tamano;
 public Archivo ()
     { 
      estudiante_primero =estudiante_primero;
@@ -137,7 +138,7 @@ public Archivo ()
 
 
 
-
+//muestra de adelante para atras
 public void mostrar ()
 {
     Estudiante aux;
@@ -147,8 +148,23 @@ public void mostrar ()
        aux= aux.siguiente;
     }while (aux!=estudiante_primero);
 
+Administrador Administrador=new Administrador();
+    Administrador.add();
+}
 
+//muestra de atras para adelante 
+public void mostrar2 ()
+{ 
+    Estudiante aux;
+    aux=estudiante_primero.anterior;
+    //verificar si es nulo o no :v sino ya pise xD
+    do{
+        System.out.println(aux.getCarnet());
+       aux= aux.anterior;
+    }while (aux!=estudiante_primero.anterior);
 
+Administrador Administrador=new Administrador();
+    Administrador.add();
 }
 
 }
