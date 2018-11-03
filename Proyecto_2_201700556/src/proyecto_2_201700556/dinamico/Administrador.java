@@ -16,13 +16,11 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import proyecto_2_201700556.Archivo;
 import proyecto_2_201700556.Estudiante;
 
-/**
- *
- * @author juare
- */
+
 public class Administrador extends JFrame
 { Archivo archivo =new Archivo();
     
@@ -90,7 +88,7 @@ public class Administrador extends JFrame
             public void actionPerformed(ActionEvent e) 
             {
                //para opciones 
-                String[] options = {"Agregar", "Modificar", "Eliminar", "ver"};
+                String[] options = {"Agregar", "Modificar", "Eliminar", "ver","Carga Masiva"};
                 //Integer[] options = {1, 3, 5, 7, 9, 11};
                 //Double[] options = {3.141, 1.618};
                 //Character[] options = {'a', 'b', 'c', 'd'};
@@ -113,6 +111,10 @@ public class Administrador extends JFrame
                     case 3:
                            marco.setVisible(false);
                         ver_estudiante();
+                        break;
+                    case 4:
+                        marco.setVisible(false);
+                        archivo.Estudiantes_Leer();
                         break;
 
                 }
@@ -494,19 +496,111 @@ public class Administrador extends JFrame
        
    }
    public void ver_estudiante()
-   
-   {
-       
-       
+      {
+      JFrame marco=new JFrame("MOSTRAR ESTUDIANTES");
+      JPanel pintar=new JPanel();
       
+      marco.setLayout(null);
+      pintar.setLayout(null);
+      JLabel titulo=new JLabel("MOSTRAR ESTUDIANTES");
+      marco.setBounds(200, 200, 1200, 600);
+        pintar.setBounds(0, 0, 1200, 600);
+        
+        
+      titulo.setBounds(500,50,200,30);
+      
+      
+      marco.setVisible(true);
+      
+       
+        marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JLabel log_out=new JLabel("LOG OUT");
+    log_out.setBounds(1100, 10, 80, 30);
+
+    JLabel regresar=new JLabel("REGRESAR");
+    regresar.setBounds(1100, 45, 80, 30);
+    
+    
+ 
+    marco.setResizable(false);
+    
+    pintar.add(regresar);
+     pintar.add(log_out);
    
-   
+      pintar.add(titulo);
+      marco.add(pintar);
+    
+    log_out.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                marco.setVisible(false);
+                Login login=new Login();
+                login.buscar();
+
+            }
+        });
+    regresar.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                marco.setVisible(false);
+                
+                add();
+
+            }
+        });
+      
+      
+    
+
+        String data[][] = new String[archivo.estudiante_tamano][8];
+        int contador=0;
+        if (archivo.estudiante_vacio()!=true) {
+           
+       
+            try {
+                    Estudiante aux=archivo.estudiante_primero;
+                do{
+                    
+                  
+                        
+                     
+                    data[contador][0]=aux.getCarnet();
+                    data[contador][1] = aux.getDPI();
+                    data[contador][2] =aux.getNombre();
+                    data[contador][3] = aux.getCorreo();
+                    data[contador][4] = aux.getDireccion();
+                    data[contador][5]  =""+aux.getCredito();
+                    data[contador][6] = aux.getPassword();
+                   contador++;
+                    aux=aux.siguiente;
+                    
+                }while(archivo.estudiante_primero!=aux);
+            } catch (Exception e) {
+        
+        }}
+            
+        String tituloo[] = {"Carnet", "DPI", "Nombre", "Correo", "Direccion", "Creditos", "Contraseña"};
+
+        DefaultTableModel tabla = new DefaultTableModel(data, tituloo) {
+            @Override
+            public boolean isCellEditable(int filas, int columna) {
+                if (columna >= 0) {
+                    return false;
+                }
+                return super.isCellEditable(filas, columna);
+            }
+        };
+        JTable lista_usuario = new JTable(tabla);
+
+        JScrollPane scroll = new JScrollPane(lista_usuario);
+        pintar.add(scroll);
+        scroll.setBounds(100, 100, 1000, 300);
+    
+    
+    
    }
-   
-   public void eliminar_estudiante()
+      public void eliminar_estudiante()
    {
    
-   JFrame marco =new JFrame("AGREGAR ESTUDIANTE");
+    JFrame marco =new JFrame("AGREGAR ESTUDIANTE");
     JPanel pintar=new JPanel();
     JLabel titulo =new JLabel("AGREGAR ESTUDIANTE");
     JButton boton_confirmar=new JButton("CONFIRMAR");
@@ -515,10 +609,10 @@ public class Administrador extends JFrame
     marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     pintar.setVisible(true);
     marco.setBounds(400, 100, 500, 450);
-      pintar.setBounds(200, 100, 500, 600);
-     pintar.setLayout(null);
-   marco.setResizable(false);
-     titulo.setBounds(190, 50, 150, 30);
+    pintar.setBounds(200, 100, 500, 600);
+    pintar.setLayout(null);
+    marco.setResizable(false);
+    titulo.setBounds(190, 50, 150, 30);
 
     boton_confirmar.setBounds(350, 350, 120, 30);
    
@@ -727,8 +821,6 @@ public class Administrador extends JFrame
    
    
    }
-   
-   
    
    public void agregar_curso(){}
    public void modificar_curso(){}
