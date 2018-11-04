@@ -131,7 +131,7 @@ public class Administrador extends JFrame
             {
             
              //para opciones 
-                String[] options = {"Agregar", "Modificar", "Eliminar", "ver"};
+                String[] options = {"Agregar", "Modificar", "Eliminar", "ver","Carga Masiva"};
                 //Integer[] options = {1, 3, 5, 7, 9, 11};
                 //Double[] options = {3.141, 1.618};
                 //Character[] options = {'a', 'b', 'c', 'd'};
@@ -155,6 +155,10 @@ public class Administrador extends JFrame
                            marco.setVisible(false);
                         ver_curso();
                         break;
+                    case 4:
+                            marco.setVisible(false);
+                            archivo.curso_leer();
+                            break;
 
                 }
             
@@ -824,7 +828,7 @@ public class Administrador extends JFrame
    
    public void agregar_curso(){}
    public void modificar_curso(){}
-   public void ver_curso(){}
+   public void ver_curso(){archivo.mostrar3();}
    public void eliminar_curso(){}
    
    
