@@ -20,16 +20,57 @@ public class Archivo
       Estudiante aux; 
     public   static Estudiante  estudiante_primero;
     public static   Estudiante estudiante_ultimo;
-     public static int estudiante_tamano;
+    public static int estudiante_tamano;
+    
+    public static Curso curso_primero;
+    public static Curso curso_ultimo;
+    public static int curso_tamano;
+    
+    public static Catedratico catedratico_primero;
+    public static Catedratico catedratico_ultimo;
+    public static int catedratico_tamano;
+        Curso primero=null;
+        Curso ultimo=null;
+     
+     
+     
+     
+     
+     
 public Archivo ()
     { 
      estudiante_primero =estudiante_primero;
     estudiante_ultimo=estudiante_ultimo;
     estudiante_tamano=estudiante_tamano;
+    
+    curso_primero=curso_primero;
+    curso_ultimo=curso_ultimo;
+    curso_tamano=curso_tamano;
+    
+    catedratico_tamano=catedratico_tamano;
+    catedratico_primero=catedratico_primero;
+    catedratico_ultimo=catedratico_ultimo;
     }
     public boolean estudiante_vacio()
     {
         if (estudiante_primero==null) {
+          return true;  
+        }
+        else{return  false;}
+    
+    }
+       public boolean curso_vacio()
+    {
+        if (curso_primero==null) {
+          return true;  
+        }
+        else{return  false;}
+    
+    }
+       
+          public boolean catedratico_vacio()
+    {
+        if (catedratico_primero==null) {
           return true;  
         }
         else{return  false;}
@@ -45,8 +86,7 @@ public Archivo ()
            
             estudiante_ultimo = nuevo;
             
-            estudiante_ultimo.enlazar_siguiente(estudiante_primero);
-            estudiante_primero.enlazar_anterior(estudiante_ultimo);
+          
         } else{
             
             estudiante_ultimo.enlazar_siguiente(nuevo);
@@ -189,5 +229,225 @@ public void mostrar2 ()
 Administrador Administrador=new Administrador();
     Administrador.add();
 }
+public void curso_leer()
+{
+ // es para 
+    File archivo_guardado;
+    FileReader fr;
+    BufferedReader br;
+  javax.swing.JFileChooser j=new javax.swing.JFileChooser();
+       j.showOpenDialog(j);
+     
+      
+    try
+    {  if(j.getSelectedFile()!=null){
+        
+        
+        
+       
+         
+         archivo=j.getSelectedFile().getAbsolutePath();
+         
+         
+         String aux_archivo=archivo;
+             
+         String []verificar= aux_archivo.split("\\.");
+         
+              
+              
+         
+                if (verificar[1].equals("ipc_c")) {
+                             
+         
+         
+         
+         
+    archivo_guardado=new File(archivo);
+        
+    fr=new FileReader(archivo_guardado);
+    br=new BufferedReader(fr);
+        
+        String linea;
+        //lee el archivo que no sea nulo
+       
+        while((linea=br.readLine())!=null)
+        { String []info=new String[9];
+        int i=0;
+    
+            // System.out.println(linea);
+             //separa la linea  en palabra
+            StringTokenizer st = new StringTokenizer (linea);
+            
+     while (st.hasMoreTokens ()) {
+         // ";" el parametro que separa la linea 
 
+        //cambiar de lugar 
+          info[i]  = st.nextToken (";");
+            i++;
+     }
+        
+        //nuevo curso
+        curso_vacio();
+        boolean estado=false;
+        if(info[4].equalsIgnoreCase("si")){estado=true;}else{estado=false;}
+//        
+//        
+//        
+//        2 nombre del catedratico 
+//        String contra=null;
+//           Random aleatorio = new Random();
+//        int ID = 50 + aleatorio.nextInt(100);
+//        contra=info[0]+ID;
+System.out.print(info[5]+" ,");
+System.out.print(info[3]+" ,");
+System.out.print(info[4]+" ,");
+System.out.print(info[5]+" ,");
+System.out.println(info[6]);
+        curso_agregar_final(new Curso(Integer.valueOf(info[0]),info[1],info[2],Integer.valueOf(info[3]),estado,info[5]),info[6],info[7]);
+       
+        }
+
+        
+         
+        
+        
+               if (  0!=archivo_guardado.length()) 
+            {
+              
+               JOptionPane.showMessageDialog(null, "carga completa");
+               Administrador Administrador=new Administrador();
+    Administrador.add();
+            }
+            else{JOptionPane.showMessageDialog(null, "no hay datos que cargar");  }
+            
+            
+      // siempre se debe cerrar el archivo
+        
+           br.close();
+        fr.close();   
+      
+    
+    
+  
+    
+                }else{JOptionPane.showMessageDialog(null, "Archivo no valido");Administrador Administrador=new Administrador();Administrador.add();}}   else{Administrador Administrador=new Administrador();
+    Administrador.add();}
+}catch (Exception c){JOptionPane.showMessageDialog(null, "archivo no valido"+ c);Administrador Administrador=new Administrador();
+    Administrador.add();}
+    
+
+}
+public void curso_agregar_final(Curso nuevo,String pre_cursos,String pos_cursos)
+{
+  // Consulta si la lista esta vacia.
+        if (curso_vacio()) {
+         
+            curso_primero = nuevo;
+           
+            curso_ultimo = nuevo;
+            if (pre_cursos.equals(" ")) {}else{agregar_pre_final( pre_cursos,true);  }
+            } else{
+            
+            curso_ultimo.enlazarsiguiente(nuevo);
+            
+            
+            nuevo.enlazarsiguiente(curso_primero);
+            
+            
+            
+            curso_ultimo = nuevo;
+              if (pre_cursos.equals(" ")) {}else{agregar_pre_final( pre_cursos,false); }
+               }
+       
+        curso_tamano++;
+
+}
+public void catedratico_agregar_final(Catedratico nuevo)
+{
+  // Consulta si la lista esta vacia.
+        if (catedratico_vacio()) {
+         
+            catedratico_primero = nuevo;
+           
+            catedratico_ultimo = nuevo;
+            
+            catedratico_ultimo.enlazarsiguiente(catedratico_primero);
+           
+        } else{
+            
+            catedratico_ultimo.enlazarsiguiente(nuevo);
+            
+            
+            nuevo.enlazarsiguiente(catedratico_primero);
+            
+            
+            
+            catedratico_ultimo = nuevo;
+        }
+       
+        catedratico_tamano++;
+
+}
+public void agregar_pre_final(String cadena_cursos,boolean primer_curso)
+{
+        primero=null;
+        ultimo=null;
+         String []Pre=cadena_cursos.split(",");
+      
+            
+            for (int i = 0; i < Pre.length; i++) {
+    
+    Curso nuevo= new Curso(Integer.valueOf(Pre[i]),"","",0,false,"");
+            
+    if (primero==null) {
+             primero= nuevo;
+            ultimo=nuevo;
+    }else
+    {
+        ultimo.enlazarsiguientepre(nuevo);
+       ultimo=nuevo;  }  }     
+          
+    Curso aux;
+      aux=primero;
+             if (primer_curso)
+            {
+                curso_primero.enlazarsiguientepre(primero); 
+                curso_ultimo=curso_primero;
+            }else
+            {
+             curso_ultimo.enlazarsiguientepre(primero);
+            } }
+
+public void agregar_pos_final(){}
+public void mostrar3()
+{
+    
+    
+    Curso aux;
+      aux=curso_primero;
+      do{
+          System.out.println(aux.getCodigo()+"    ,  "+aux.getNombre());
+          while(aux.pre_siguiente!=null)
+          {
+             System.out.print(aux.pre_siguiente.getCodigo()+" ,");
+             
+             aux.pre_siguiente=aux.pre_siguiente.pre_siguiente;
+          }
+          
+          System.out.println("");
+          
+      aux=aux.siguiente;
+      }while(aux!=curso_primero);
+//     Curso aux;
+//    aux=curso_primero;
+//    do{
+//        while(aux.pre_siguiente!=null)
+//        {
+//            System.out.println(aux.pre_siguiente.getCodigo());
+//        }
+//       aux= aux.siguiente;
+//    }while (aux!=curso_primero);
+
+
+}
 }
