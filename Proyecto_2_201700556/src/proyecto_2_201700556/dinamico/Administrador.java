@@ -827,8 +827,190 @@ public class Administrador extends JFrame
    }
    
    public void agregar_curso(){}
-   public void modificar_curso(){}
-   public void ver_curso(){archivo.mostrar3();}
+   public void modificar_curso(){archivo.mostrar3();}
+   public void ver_curso()
+   {
+   
+      JFrame marco=new JFrame("MOSTRAR CURSOS");
+      JPanel pintar=new JPanel();
+      
+      marco.setLayout(null);
+      pintar.setLayout(null);
+      JLabel titulo=new JLabel("MOSTRAR CURSOS");
+      marco.setBounds(200, 200, 1200, 600);
+        pintar.setBounds(0, 0, 1200, 600);
+        
+        
+      titulo.setBounds(500,50,200,30);
+      
+      
+      marco.setVisible(true);
+      
+       
+        marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JLabel log_out=new JLabel("LOG OUT");
+    log_out.setBounds(1100, 10, 80, 30);
+
+    JLabel regresar=new JLabel("REGRESAR");
+    regresar.setBounds(1100, 45, 80, 30);
+    
+    
+ 
+    marco.setResizable(false);
+    
+    pintar.add(regresar);
+     pintar.add(log_out);
+   
+      pintar.add(titulo);
+      marco.add(pintar);
+    
+    log_out.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                marco.setVisible(false);
+                Login login=new Login();
+                login.buscar();
+
+            }
+        });
+    regresar.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                marco.setVisible(false);
+                
+                add();
+
+            }
+        });
+      
+      
+    
+
+        String data[][] = new String[archivo.curso_tamano][8];
+        int contador=0;
+        if (archivo.curso_vacio()!=true) {
+            Curso aux=archivo.curso_primero;
+       Curso aux2=archivo.curso_primero;
+            try {
+                 
+                do{
+                    
+                     String lab=null;
+                        if (aux.isLaboratorio())
+                        {
+                            lab="si";
+                         }else{lab="no";}
+                     
+                    data[contador][0]=""+aux.getCodigo();
+                    data[contador][1] = aux.getNombre();
+                    data[contador][2] =aux.getCatedratico();
+                    data[contador][3] = ""+aux.getCredito();
+                    data[contador][4] = lab;
+                   data[contador][5] = aux.getSeccion();
+                    
+                    
+                    //recorer los pre 
+                    String pre="";
+                     int curso_primero=0;
+                     int curso_primerop=0;
+                     int pre_contador=0;
+                     int pos_contador=0;
+                    if (aux.pre_siguiente==null) 
+                        {
+                          
+                        }else{
+                    
+                     curso_primero =aux.pre_siguiente.getCodigo();
+                   
+                    if (aux2.pos_siguiente==null) {
+                        
+                    }else{  curso_primerop=aux2.pos_siguiente.getCodigo();}}
+                    //recorer pre
+                   do
+                    {
+                  
+                        if (aux.pre_siguiente==null) 
+                        {
+                            break;
+                        }
+                        if (pre.equals("")) {
+                            pre=""+aux.pre_siguiente.getCodigo();
+                        }else{
+                        pre=pre.concat(","+aux.pre_siguiente.getCodigo());}
+                     aux.pre_siguiente=aux.pre_siguiente.pre_siguiente;
+                     if (aux.pre_siguiente==null&&pre_contador==1) {
+                            break;
+                        }
+                     pre_contador++;
+                    }while(aux.pre_siguiente.getCodigo()!=curso_primero);
+                   
+                      data[contador][6]  =pre;
+                    //recorer pos
+                    
+                    
+                      String pos="";
+                     do
+                    {
+                  
+                        if (aux2.pos_siguiente==null) 
+                        {
+                            break;
+                        }
+                        if (pos.equals("")) {
+                            pos=""+aux2.pos_siguiente.getCodigo();
+                        }else{
+                        pos=pos.concat(","+aux2.pos_siguiente.getCodigo());}
+                         pos_contador++;
+                     //cambiar la variable para que no se chinge nada haa funciona           manana hago lista de catedraticos     creo los sinwg    y  el martes enlazo y termino gg
+                        Curso a=aux2.pos_siguiente.pos_siguiente;
+                        if (a==null) {
+                            
+                        }else{
+                     aux2.pos_siguiente=aux2.pos_siguiente.pos_siguiente;
+                        }
+                     
+                     
+                     
+                        if (aux2.pos_siguiente==null&&pos_contador==1) {
+                            break;
+                        }
+                         
+                    }while(aux2.pos_siguiente.getCodigo()!=curso_primerop);
+                                 
+                          data[contador][7]  =pos;
+                     
+         
+                    
+                    
+                    
+       
+                   contador++;
+                   aux2=aux2.siguiente;
+                    aux=aux.siguiente;
+                  
+                    
+                }while(archivo.curso_primero!=aux);
+            } catch (Exception e) {System.out.println(e);
+        
+        }}
+            
+        String tituloo[] = {"Codigo", "Curso", "Catedratico", "Credito", "Lab", "Seccion","Pre-requisito", "Pos-requitito"};
+
+        DefaultTableModel tabla = new DefaultTableModel(data, tituloo) {
+            @Override
+            public boolean isCellEditable(int filas, int columna) {
+                if (columna >= 0) {
+                    return false;
+                }
+                return super.isCellEditable(filas, columna);
+            }
+        };
+        JTable lista_usuario = new JTable(tabla);
+
+        JScrollPane scroll = new JScrollPane(lista_usuario);
+        pintar.add(scroll);
+        scroll.setBounds(100, 100, 1000, 300);
+    
+    
+   }
    public void eliminar_curso(){}
    
    
