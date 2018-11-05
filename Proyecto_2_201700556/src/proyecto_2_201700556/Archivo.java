@@ -29,8 +29,10 @@ public class Archivo
     public static Catedratico catedratico_primero;
     public static Catedratico catedratico_ultimo;
     public static int catedratico_tamano;
-        Curso primero=null;
-        Curso ultimo=null;
+    
+ 
+        //Curso primero=null;
+       // Curso ultimo=null;
      
      
      
@@ -39,6 +41,7 @@ public class Archivo
      
 public Archivo ()
     { 
+       
      estudiante_primero =estudiante_primero;
     estudiante_ultimo=estudiante_ultimo;
     estudiante_tamano=estudiante_tamano;
@@ -149,7 +152,7 @@ public Archivo ()
         { String []info=new String[6];
         int i=0;
     
-            // System.out.println(linea);
+             
              //separa la linea  en palabra
             StringTokenizer st = new StringTokenizer (linea);
             
@@ -237,32 +240,14 @@ public void curso_leer()
     BufferedReader br;
   javax.swing.JFileChooser j=new javax.swing.JFileChooser();
        j.showOpenDialog(j);
-     
-      
+    
     try
     {  if(j.getSelectedFile()!=null){
-        
-        
-        
-       
-         
          archivo=j.getSelectedFile().getAbsolutePath();
-         
-         
          String aux_archivo=archivo;
-             
          String []verificar= aux_archivo.split("\\.");
-         
-              
-              
-         
-                if (verificar[1].equals("ipc_c")) {
-                             
-         
-         
-         
-         
-    archivo_guardado=new File(archivo);
+           if (verificar[1].equals("ipc_c")) {
+            archivo_guardado=new File(archivo);
         
     fr=new FileReader(archivo_guardado);
     br=new BufferedReader(fr);
@@ -271,40 +256,31 @@ public void curso_leer()
         //lee el archivo que no sea nulo
        
         while((linea=br.readLine())!=null)
-        { String []info=new String[9];
-        int i=0;
-    
-            // System.out.println(linea);
-             //separa la linea  en palabra
-            StringTokenizer st = new StringTokenizer (linea);
-            
-     while (st.hasMoreTokens ()) {
-         // ";" el parametro que separa la linea 
-
-        //cambiar de lugar 
-          info[i]  = st.nextToken (";");
-            i++;
-     }
+        {  
         
-        //nuevo curso
+         linea=linea.replace(";;","; ;");
+          String   []info=linea.split(";");
+   
+     
         curso_vacio();
         boolean estado=false;
         if(info[4].equalsIgnoreCase("si")){estado=true;}else{estado=false;}
-//        
-//        
-//        
-//        2 nombre del catedratico 
-//        String contra=null;
-//           Random aleatorio = new Random();
-//        int ID = 50 + aleatorio.nextInt(100);
-//        contra=info[0]+ID;
-System.out.print(info[5]+" ,");
-System.out.print(info[3]+" ,");
-System.out.print(info[4]+" ,");
-System.out.print(info[5]+" ,");
-System.out.println(info[6]);
+         
+            
+            
+            if (info.length==7) {
+                String z="-1";
+                
+                  curso_agregar_final(new Curso(Integer.valueOf(info[0]),info[1],info[2],Integer.valueOf(info[3]),estado,info[5]),info[6],z);
+            }
+             
+            
+                 
+            else{
+ 
+               
         curso_agregar_final(new Curso(Integer.valueOf(info[0]),info[1],info[2],Integer.valueOf(info[3]),estado,info[5]),info[6],info[7]);
-       
+            }
         }
 
         
@@ -346,7 +322,10 @@ public void curso_agregar_final(Curso nuevo,String pre_cursos,String pos_cursos)
            
             curso_ultimo = nuevo;
             if (pre_cursos.equals(" ")) {}else{agregar_pre_final( pre_cursos,true);  }
-            } else{
+            if (pos_cursos.equals("-1")) {}else{agregar_pos_final(pos_cursos,true);}
+                
+            
+        } else{
             
             curso_ultimo.enlazarsiguiente(nuevo);
             
@@ -357,7 +336,29 @@ public void curso_agregar_final(Curso nuevo,String pre_cursos,String pos_cursos)
             
             curso_ultimo = nuevo;
               if (pre_cursos.equals(" ")) {}else{agregar_pre_final( pre_cursos,false); }
-               }
+             if (pos_cursos.equals("-1")) {}else{agregar_pos_final(pos_cursos,false);}      
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
        
         curso_tamano++;
 
@@ -390,10 +391,10 @@ public void catedratico_agregar_final(Catedratico nuevo)
 }
 public void agregar_pre_final(String cadena_cursos,boolean primer_curso)
 {
-        primero=null;
-        ultimo=null;
+        Curso primero=null;
+       Curso ultimo=null;
          String []Pre=cadena_cursos.split(",");
-      
+     
             
             for (int i = 0; i < Pre.length; i++) {
     
@@ -402,10 +403,13 @@ public void agregar_pre_final(String cadena_cursos,boolean primer_curso)
     if (primero==null) {
              primero= nuevo;
             ultimo=nuevo;
+            
     }else
     {
         ultimo.enlazarsiguientepre(nuevo);
-       ultimo=nuevo;  }  }     
+        nuevo.enlazarsiguientepre(primero);
+        ultimo=nuevo;
+      }  }     
           
     Curso aux;
       aux=primero;
@@ -413,41 +417,77 @@ public void agregar_pre_final(String cadena_cursos,boolean primer_curso)
             {
                 curso_primero.enlazarsiguientepre(primero); 
                 curso_ultimo=curso_primero;
+               
+         
             }else
             {
              curso_ultimo.enlazarsiguientepre(primero);
+             
             } }
+public void agregar_pos_final(String cadena_pos,boolean primer_curso)
+{
+ Curso primero=null;
+       Curso ultimo=null;
+         String []pos=cadena_pos.split(",");
+      
+            
+            for (int i = 0; i < pos.length; i++) {
+    
+    Curso nuevo= new Curso(Integer.valueOf(pos[i]),"","",0,false,"");
+            
+    if (primero==null) {
+             primero= nuevo;
+            ultimo=nuevo;
+            
+    }else
+    {
+        ultimo.enlazarpos(nuevo);
+          nuevo.enlazarpos(primero);
+       ultimo=nuevo;  }  }     
+          
+    Curso aux;
+      aux=primero;
+             if (primer_curso)
+            {
+                curso_primero.enlazarpos(primero); 
+                curso_ultimo=curso_primero;
+            }else
+            {
+             curso_ultimo.enlazarpos(primero);
+            }
 
-public void agregar_pos_final(){}
+
+
+
+
+}
 public void mostrar3()
 {
     
     
     Curso aux;
       aux=curso_primero;
+      
       do{
           System.out.println(aux.getCodigo()+"    ,  "+aux.getNombre());
-          while(aux.pre_siguiente!=null)
-          {
-             System.out.print(aux.pre_siguiente.getCodigo()+" ,");
+          
+          Curso aux2=aux;
+          
+          
+          
+         // while(aux2.pre_siguiente!=null)
+          do{
+             System.out.print(aux2.pre_siguiente.getCodigo()+" ,");
              
-             aux.pre_siguiente=aux.pre_siguiente.pre_siguiente;
-          }
+             aux2.pre_siguiente=aux2.pre_siguiente.pre_siguiente;
+          }while(aux2.pre_siguiente!=aux.pre_siguiente);
           
           System.out.println("");
           
       aux=aux.siguiente;
       }while(aux!=curso_primero);
-//     Curso aux;
-//    aux=curso_primero;
-//    do{
-//        while(aux.pre_siguiente!=null)
-//        {
-//            System.out.println(aux.pre_siguiente.getCodigo());
-//        }
-//       aux= aux.siguiente;
-//    }while (aux!=curso_primero);
-
+      
+      
 
 }
 }
