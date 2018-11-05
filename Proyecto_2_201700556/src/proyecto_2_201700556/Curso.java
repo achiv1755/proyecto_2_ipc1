@@ -19,9 +19,10 @@ public class Curso
  String seccion;
  boolean estado;
  
- Curso siguiente;
-  Curso pre_siguiente;
-  Curso pos_siguiente;
+  public Curso siguiente;
+  public Curso pre_siguiente;
+  public Curso pos_siguiente;
+ 
   
   
   public Curso (int codigo,String nombre,String catedratico,int credito,boolean laboratorio,String seccion)
