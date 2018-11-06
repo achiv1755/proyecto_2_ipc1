@@ -36,17 +36,17 @@ public class Administrador extends JFrame
     marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     pintar.setVisible(true);
     marco.setBounds(200, 100, 500, 400);
-      pintar.setBounds(200, 100, 500, 400);
-     pintar.setLayout(null);
-   marco.setResizable(false);
-     titulo.setBounds(190, 50, 150, 30);
+    pintar.setBounds(200, 100, 500, 400);
+    pintar.setLayout(null);
+    marco.setResizable(false);
+    titulo.setBounds(190, 50, 150, 30);
 
     boton_curso.setBounds(200, 100, 100, 30);
     boton_reporte.setBounds(90, 100, 100, 30);
     boton_usuario.setBounds(310, 100, 120, 30);
     
     boton_curso.setBackground(Color.white);
-      boton_reporte.setBackground(Color.white);
+    boton_reporte.setBackground(Color.white);
     boton_usuario.setBackground(Color.white);
     JLabel log_out=new JLabel("LOG OUT");
     log_out.setBounds(400, 10, 80, 30);
@@ -55,11 +55,11 @@ public class Administrador extends JFrame
     
     
     
-   marco.add(pintar);
-   pintar.add(titulo);
-   pintar.add(boton_reporte);
-   pintar.add(boton_curso);
-   pintar.add(boton_usuario);
+    marco.add(pintar);
+    pintar.add(titulo);
+    pintar.add(boton_reporte);
+    pintar.add(boton_curso);
+    pintar.add(boton_usuario);
    
    
    
@@ -89,16 +89,14 @@ public class Administrador extends JFrame
             {
                //para opciones 
                 String[] options = {"Agregar", "Modificar", "Eliminar", "ver","Carga Masiva"};
-                //Integer[] options = {1, 3, 5, 7, 9, 11};
-                //Double[] options = {3.141, 1.618};
-                //Character[] options = {'a', 'b', 'c', 'd'};
+        
                 int x = JOptionPane.showOptionDialog(null, "Seleccione una opcion",
                         "Estudiante",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
                 switch (x) {
                     case 0:
                         marco.setVisible(false);
-                        agregar_estudiante();
+                        agregar_curso();
                         break;
                     case 1:
                            marco.setVisible(false);
@@ -132,9 +130,7 @@ public class Administrador extends JFrame
             
              //para opciones 
                 String[] options = {"Agregar", "Modificar", "Eliminar", "ver","Carga Masiva"};
-                //Integer[] options = {1, 3, 5, 7, 9, 11};
-                //Double[] options = {3.141, 1.618};
-                //Character[] options = {'a', 'b', 'c', 'd'};
+ 
                 int x = JOptionPane.showOptionDialog(null, "Seleccione una opcion",
                         "Curso",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
@@ -306,9 +302,9 @@ public class Administrador extends JFrame
    }
    public void modificar_estudiante()
    {
-   JFrame marco =new JFrame("AGREGAR ESTUDIANTE");
+   JFrame marco =new JFrame("MODIFICAR ESTUDIANTE");
     JPanel pintar=new JPanel();
-    JLabel titulo =new JLabel("AGREGAR ESTUDIANTE");
+    JLabel titulo =new JLabel("MODIFICAR ESTUDIANTE");
     JButton boton_confirmar=new JButton("CONFIRMAR");
    
     marco.setVisible(true);
@@ -604,9 +600,9 @@ public class Administrador extends JFrame
       public void eliminar_estudiante()
    {
    
-    JFrame marco =new JFrame("AGREGAR ESTUDIANTE");
+    JFrame marco =new JFrame("ELIMINAR ESTUDIANTE");
     JPanel pintar=new JPanel();
-    JLabel titulo =new JLabel("AGREGAR ESTUDIANTE");
+    JLabel titulo =new JLabel("ELIMINAR ESTUDIANTE");
     JButton boton_confirmar=new JButton("CONFIRMAR");
    
     marco.setVisible(true);
@@ -651,7 +647,7 @@ public class Administrador extends JFrame
    int a=0;
     
     
- 
+ cancelar.setVisible(false);
     
 
        for (int i = 0; i < 7; i++)
@@ -826,8 +822,543 @@ public class Administrador extends JFrame
    
    }
    
-   public void agregar_curso(){}
-   public void modificar_curso(){archivo.mostrar3();}
+   public void agregar_curso()
+   {
+   
+   
+   JFrame marco =new JFrame("AGREGAR CURSO");
+    JPanel pintar=new JPanel();
+    JLabel titulo =new JLabel("AGREGAR CURSO");
+    JButton boton_confirmar=new JButton("CONFIRMAR");
+   
+    marco.setVisible(true);
+    marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    pintar.setVisible(true);
+    marco.setBounds(400, 100, 500, 450);
+      pintar.setBounds(200, 100, 500, 600);
+     pintar.setLayout(null);
+   marco.setResizable(false);
+     titulo.setBounds(190, 50, 150, 30);
+
+    boton_confirmar.setBounds(350, 350, 120, 30);
+   
+    
+    boton_confirmar .setBackground(Color.white);
+   
+    JLabel log_out=new JLabel("LOG OUT");
+    log_out.setBounds(400, 10, 80, 30);
+    pintar.add(log_out);
+    JLabel regresar=new JLabel("REGRESAR");
+    regresar.setBounds(400, 45, 80, 30);
+    pintar.add(regresar);
+    
+    
+    
+   marco.add(pintar);
+   pintar.add(titulo);
+   pintar.add(boton_confirmar);
+ 
+   
+   
+   JLabel []datos=new JLabel[8];
+   JTextField []text=new JTextField[8];
+   int a=0;
+    
+    
+ 
+    
+
+       for (int i = 0; i < 8; i++)
+       {
+           datos[i]=new JLabel();
+       datos[i].setBounds(50, 100+a, 100, 30); 
+            text[i]=new JTextField();
+              text[i].setBounds(150, 100+a, 100, 30); 
+            a+=33;
+            pintar.add(text[i]);
+       pintar.add(datos[i]);    
+       }
+       for (int i = 0; i < 6; i++) {
+           
+       }
+       solo_numero(text[0]);
+       solo_numero(text[3]);
+       solo_numero(text[6]);
+       solo_numero(text[7]);
+     
+       
+    
+    datos[0].setText("Codigo");
+    datos[1].setText("Nombre Curso");
+    datos[2].setText("Catedratico");
+    datos[3].setText("Credito");
+    datos[4].setText("Laboratorio");
+    datos[5].setText("Seccion");
+    datos[6].setText("Pre-Requisito");
+    datos[7].setText("Pos-Requisito");
+   
+   
+   
+        ActionListener confirmar = new ActionListener() {
+            @Override
+
+            public void actionPerformed(ActionEvent e) {
+            boolean permiso=true;
+                for (int i = 0; i < 6; i++) 
+                {
+                    if (text[i].getText().equals("")) 
+                    {permiso=false;
+                        JOptionPane.showMessageDialog(null, "llene todo los campos", "ALERTA", JOptionPane.WARNING_MESSAGE);
+                      break;    
+                    } 
+                }
+                if(permiso)
+                {
+                try{
+                  
+                boolean lab=false;
+                    if (text[4].getText().equalsIgnoreCase("si"))
+                    {
+                        lab=true;
+                    }else{lab=false;}
+                archivo.curso_agregar_final(new Curso(Integer.valueOf(text[0].getText()),text[1].getText(),text[2].getText(),Integer.valueOf(text[3].getText()),lab, text[5].getText()),datos[6].getText(),datos[7].getText());
+                    
+                    marco.setVisible(false);
+                    add();
+                }catch(Exception v){ JOptionPane.showMessageDialog(null, "error al llenar los datos","alerta", JOptionPane.WARNING_MESSAGE);}}
+            
+            
+            }};
+        boton_confirmar.addActionListener(confirmar);
+    
+    
+    log_out.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                marco.setVisible(false);
+                Login login=new Login();
+                login.buscar();
+
+            }
+        });
+    regresar.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                marco.setVisible(false);
+                
+                add();
+
+            }
+        });
+   
+   
+   
+   }
+   public void modificar_curso()
+   {
+       
+   JFrame marco =new JFrame("MODIFICAR CURSO");
+    JPanel pintar=new JPanel();
+    JLabel titulo =new JLabel("MODIFICAR CURSO");
+    JButton boton_confirmar=new JButton("CONFIRMAR");
+   
+    marco.setVisible(true);
+    marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    pintar.setVisible(true);
+    marco.setBounds(400, 100, 500, 450);
+      pintar.setBounds(200, 100, 500, 600);
+     pintar.setLayout(null);
+   marco.setResizable(false);
+     titulo.setBounds(190, 50, 150, 30);
+
+    boton_confirmar.setBounds(350, 350, 120, 30);
+   
+    
+    boton_confirmar .setBackground(Color.white);
+   
+    JLabel log_out=new JLabel("LOG OUT");
+    log_out.setBounds(400, 10, 80, 30);
+    pintar.add(log_out);
+    JLabel regresar=new JLabel("REGRESAR");
+    regresar.setBounds(400, 45, 80, 30);
+    pintar.add(regresar);
+    
+    boton_confirmar.setVisible(false);
+    
+   marco.add(pintar);
+   pintar.add(titulo);
+   pintar.add(boton_confirmar);
+ 
+   
+  
+   JButton buscar=new JButton("BUSCAR");
+  
+   buscar.setBackground(Color.white);
+   buscar.setBounds(330,100,100,30);
+   
+   pintar.add(buscar);
+  
+   JLabel []datos=new JLabel[8];
+   JTextField []text=new JTextField[8];
+   int a=0;
+    
+    
+ 
+    
+
+       for (int i = 0; i < 8; i++)
+       {
+           datos[i]=new JLabel();
+       datos[i].setBounds(50, 100+a, 100, 30); 
+            text[i]=new JTextField();
+              text[i].setBounds(150, 100+a, 100, 30); 
+            a+=33;
+            text[i].setVisible(false);
+            text[i].setEditable(false);
+            pintar.add(text[i]);
+       pintar.add(datos[i]);    
+       }text[0].setVisible(true);
+       
+       solo_numero(text[0]);
+       solo_numero(text[3]);
+       solo_numero(text[6]);
+       solo_numero(text[7]);
+     
+       text[0].setEditable(true);
+    
+    datos[0].setText("Codigo");
+    datos[1].setText("Nombre Curso");
+    datos[2].setText("Catedratico");
+    datos[3].setText("Credito");
+    datos[4].setText("Laboratorio");
+    datos[5].setText("Seccion");
+    datos[6].setText("Pre-Requisito");
+    datos[7].setText("Pos-Requisito");
+   
+   
+    log_out.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                marco.setVisible(false);
+                Login login=new Login();
+                login.buscar();
+
+            }
+        });
+    regresar.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                marco.setVisible(false);
+                
+                add();
+
+            }
+        });
+   
+       ActionListener buscar_action = new ActionListener() {
+            @Override
+
+            public void actionPerformed(ActionEvent e) 
+            { try{
+              
+             Curso aux=archivo.curso_primero;
+             Curso aux2=archivo.curso_primero;
+            boolean validacion=true;
+            do{
+       
+    
+                
+           
+            if (aux.getCodigo()==Integer.valueOf(text[0].getText())) 
+                {
+            
+                    for (int i = 1; i < 8; i++)
+                    {
+                    text[i].setVisible(true);
+                    }
+            
+            text[1].setText(aux.getNombre());
+            text[2].setText(aux.getCatedratico());
+            text[3].setText(""+aux.getCredito());
+            String lab;
+            if (aux.isLaboratorio())
+            {lab="si"; 
+            }else{lab="no";}
+             text[4].setText(lab);
+             text[5].setText(aux.getSeccion());
+             
+             //
+             
+             
+             String pre="";
+                 int curso_primero=0;
+                     int curso_primerop=0;
+                     int pre_contador=0;
+                     int pos_contador=0;
+                    if (aux.pre_siguiente==null) 
+                        {
+                          
+                        }else{
+                    
+                     curso_primero =aux.pre_siguiente.getCodigo();
+                   
+                    if (aux2.pos_siguiente==null) {
+                        
+                    }else{  curso_primerop=aux2.pos_siguiente.getCodigo();}}
+                    //recorer pre
+             do
+                    {
+                   if (aux.pre_siguiente==null) 
+                        {
+                            break;
+                        }
+                        if (pre.equals("")) {
+                            pre=""+aux.pre_siguiente.getCodigo();
+                        }else{
+                       pre=pre.concat(","+aux.pre_siguiente.getCodigo());}
+                        pre_contador++;
+                        
+                        Curso x=aux.pre_siguiente.pre_siguiente;
+                        
+                        if (x==null) 
+                        {
+                            
+                        }else{
+                     aux.pre_siguiente=aux.pre_siguiente.pre_siguiente;}
+                     
+                     
+                     if (aux.pre_siguiente==null&&pre_contador==1) {
+                         
+                            break;
+                        }
+                     
+                    }while(aux.pre_siguiente.getCodigo()!=curso_primero);
+                     
+                    //recorer pos
+                    
+                      String pos="";
+                     do
+                    {
+                  
+                        if (aux2.pos_siguiente==null) 
+                        {
+                            break;
+                        }
+                        if (pos.equals("")) {
+                            pos=""+aux2.pos_siguiente.getCodigo();
+                        }else{
+                        pos=pos.concat(","+aux2.pos_siguiente.getCodigo());}
+                        
+                         pos_contador++;
+      
+                        Curso a=aux2.pos_siguiente.pos_siguiente;
+                        if (a==null) {
+                            
+                        }else{
+                     aux2.pos_siguiente=aux2.pos_siguiente.pos_siguiente;
+                        }
+                     
+                     
+                     
+                        if (aux2.pos_siguiente==null&&pos_contador==1) {
+                            break;
+                        }
+                         
+                    }while(aux2.pos_siguiente.getCodigo()!=curso_primerop);
+                                 
+            
+                     
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             //recorer pre y pos
+           
+            text[6].setText(pre);
+            text[7].setText(pos);
+            boton_confirmar.setVisible(true);
+            
+            text[0].setEditable(false);
+            validacion=false;
+            break;
+            }
+            aux2=aux2.siguiente;
+             aux=aux.siguiente;
+            
+             
+
+            } while (aux != archivo.curso_primero);
+            if (validacion) 
+            {
+                JOptionPane.showMessageDialog(null, "No se encontro al curso", "ALERTA", JOptionPane.WARNING_MESSAGE);
+            }else   {  for (int i = 1; i < 8; i++)
+                    {
+                  
+                    text[i].setEditable(true);
+                    }}
+            }catch(Exception z){  JOptionPane.showMessageDialog(null, "llene el campo", "ALERTA", JOptionPane.WARNING_MESSAGE);}}
+            };
+        buscar.addActionListener(buscar_action);
+    
+       
+       
+        ActionListener editar = new ActionListener() {
+            @Override
+
+            public void actionPerformed(ActionEvent e) 
+            { 
+            
+                boolean permiso=true;
+                  for (int i = 0; i < 6; i++) 
+                {
+                    if (text[i].getText().equals("")) 
+                    {permiso=false;
+                        JOptionPane.showMessageDialog(null, "llene todo los campos", "ALERTA", JOptionPane.WARNING_MESSAGE);
+                      break;    
+                    } 
+                }
+              if(permiso){  
+             Curso aux=archivo.curso_primero;
+       
+            while(aux!=null)
+            {
+            if (aux.getCodigo()==Integer.valueOf(text[0].getText())) 
+                {
+                    
+                    aux.setNombre((text[1].getText()));
+                    aux.setCatedratico(text[2].getText());
+                    aux.setCredito(Integer.valueOf(text[3].getText()));
+                    boolean lab;
+                    if (text[4].getText().equalsIgnoreCase("si")) {
+                          lab=true;
+                        
+                    }else{lab=false;}
+                    aux.setLaboratorio(lab);
+                    aux.setSeccion((text[5].getText()));
+                    
+                    ///\//\/\/\/\//
+                    //
+                    //
+                    //
+                    //
+                    
+                    
+                    
+                    
+            //pre       
+if (text[6].getText().equalsIgnoreCase("")) {aux.enlazarsiguientepre(null);}else{
+                        
+                    
+            Curso primero=null;
+       Curso ultimo=null;
+                   
+                  
+         String []Pre=text[6].getText().split(",");
+     
+            
+            for (int i = 0; i < Pre.length; i++) {
+    
+    Curso nuevo= new Curso(Integer.valueOf(Pre[i]),"","",0,false,"");
+            
+    if (primero==null) {
+             primero= nuevo;
+            ultimo=nuevo;
+            
+    }else
+    {
+        ultimo.enlazarsiguientepre(nuevo);
+        nuevo.enlazarsiguientepre(primero);
+        ultimo=nuevo;
+      }  }     
+      aux.enlazarsiguientepre(primero);}
+               
+      
+      
+      
+      
+      if (text[7].getText().equalsIgnoreCase("")){   aux.enlazarpos(null);}else {
+                   //pos 
+        Curso primero2=null;
+       Curso ultimo2=null;
+      
+         String []pos=text[7].getText().split(",");
+      
+            
+            for (int i = 0; i < pos.length; i++) {
+    
+    Curso nuevo= new Curso(Integer.valueOf(pos[i]),"","",0,false,"");
+            
+    if (primero2==null) {
+             primero2= nuevo;
+            ultimo2=nuevo;
+            
+    }else
+    {
+        ultimo2.enlazarpos(nuevo);
+          nuevo.enlazarpos(primero2);
+       ultimo2=nuevo;  }  }     
+     
+             aux.enlazarpos(primero2);}
+           
+
+
+
+           
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                   //(text[6].getText());
+                    
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                    JOptionPane.showMessageDialog(null, "Cambio exitoso", "ALERTA", JOptionPane.WARNING_MESSAGE);
+                    marco.setVisible(false);
+                    add();
+                    
+           
+            
+           
+            break;
+             }
+             aux=aux.siguiente;
+    
+            }
+           
+            
+            }}};
+       
+      boton_confirmar.addActionListener(editar);
+       
+       
+    
+   }
    public void ver_curso()
    {
    
@@ -926,25 +1457,33 @@ public class Administrador extends JFrame
                     //recorer pre
                    do
                     {
-                  
-                        if (aux.pre_siguiente==null) 
+                   if (aux.pre_siguiente==null) 
                         {
                             break;
                         }
                         if (pre.equals("")) {
                             pre=""+aux.pre_siguiente.getCodigo();
                         }else{
-                        pre=pre.concat(","+aux.pre_siguiente.getCodigo());}
-                     aux.pre_siguiente=aux.pre_siguiente.pre_siguiente;
+                       pre=pre.concat(","+aux.pre_siguiente.getCodigo());}
+                        pre_contador++;
+                        
+                        Curso x=aux.pre_siguiente.pre_siguiente;
+                        
+                        if (x==null) 
+                        {
+                            
+                        }else{
+                     aux.pre_siguiente=aux.pre_siguiente.pre_siguiente;}
+                     
+                     
                      if (aux.pre_siguiente==null&&pre_contador==1) {
+                         
                             break;
                         }
-                     pre_contador++;
+                     
                     }while(aux.pre_siguiente.getCodigo()!=curso_primero);
-                   
                       data[contador][6]  =pre;
                     //recorer pos
-                    
                     
                       String pos="";
                      do
@@ -958,6 +1497,7 @@ public class Administrador extends JFrame
                             pos=""+aux2.pos_siguiente.getCodigo();
                         }else{
                         pos=pos.concat(","+aux2.pos_siguiente.getCodigo());}
+                        
                          pos_contador++;
                      //cambiar la variable para que no se chinge nada haa funciona           manana hago lista de catedraticos     creo los sinwg    y  el martes enlazo y termino gg
                         Curso a=aux2.pos_siguiente.pos_siguiente;
@@ -1011,7 +1551,332 @@ public class Administrador extends JFrame
     
     
    }
-   public void eliminar_curso(){}
+   public void eliminar_curso()
+   {
+   
+        JFrame marco =new JFrame("ELIMINAR ESTUDIANTE");
+    JPanel pintar=new JPanel();
+    JLabel titulo =new JLabel("ELIMINAR ESTUDIANTE");
+    JButton boton_confirmar=new JButton("CONFIRMAR");
+   
+    marco.setVisible(true);
+    marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    pintar.setVisible(true);
+    marco.setBounds(400, 100, 500, 450);
+    pintar.setBounds(200, 100, 500, 650);
+    pintar.setLayout(null);
+    marco.setResizable(false);
+    titulo.setBounds(190, 50, 150, 30);
+
+    boton_confirmar.setBounds(350, 400, 120, 30);
+   
+    
+    boton_confirmar .setBackground(Color.white);
+   
+    JLabel log_out=new JLabel("LOG OUT");
+    log_out.setBounds(400, 10, 80, 30);
+    pintar.add(log_out);
+    JLabel regresar=new JLabel("REGRESAR");
+    regresar.setBounds(400, 45, 80, 30);
+    pintar.add(regresar);
+    
+    boton_confirmar.setVisible(false);
+    
+   marco.add(pintar);
+   pintar.add(titulo);
+   pintar.add(boton_confirmar);
+ 
+   
+  
+   JButton buscar=new JButton("BUSCAR");
+  
+   buscar.setBackground(Color.white);
+   buscar.setBounds(330,100,100,30);
+   
+   pintar.add(buscar);
+        
+       JButton cancelar=new JButton("CANCELAR");
+        cancelar.setVisible(false);
+   JLabel []datos=new JLabel[8];
+   JTextField []text=new JTextField[8];
+   int a=0;
+    
+    
+ 
+    
+
+       for (int i = 0; i < 8; i++)
+       {
+           datos[i]=new JLabel();
+       datos[i].setBounds(50, 100+a, 100, 30); 
+            text[i]=new JTextField();
+              text[i].setBounds(150, 100+a, 100, 30); 
+              text[i].setVisible(false);
+            a+=33;
+            pintar.add(text[i]);
+       pintar.add(datos[i]);    
+       }
+       text[0].setVisible(true);
+       solo_numero(text[0]);
+       solo_numero(text[1]);
+       solo_numero(text[5]);
+    
+  datos[0].setText("Codigo");
+    datos[1].setText("Nombre Curso");
+    datos[2].setText("Catedratico");
+    datos[3].setText("Credito");
+    datos[4].setText("Laboratorio");
+    datos[5].setText("Seccion");
+    datos[6].setText("Pre-Requisito");
+    datos[7].setText("Pos-Requisito");
+   
+    cancelar.setBounds(200, 350, 120, 30);
+    cancelar.setBackground(Color.white);
+    
+    
+    log_out.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                marco.setVisible(false);
+                Login login=new Login();
+                login.buscar();
+
+            }
+        });
+    regresar.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                marco.setVisible(false);
+                
+                add();
+
+            }
+        });
+   
+       ActionListener buscar_action = new ActionListener() {
+            @Override
+
+            public void actionPerformed(ActionEvent e) 
+            { 
+              try{
+              
+             Curso aux=archivo.curso_primero;
+             Curso aux2=archivo.curso_primero;
+            boolean validacion=true;
+            do{
+       
+    
+                
+           
+            if (aux.getCodigo()==Integer.valueOf(text[0].getText())) 
+                {
+            
+                    for (int i = 1; i < 8; i++)
+                    {
+                    text[i].setVisible(true);
+                    }
+            
+            text[1].setText(aux.getNombre());
+            text[2].setText(aux.getCatedratico());
+            text[3].setText(""+aux.getCredito());
+            String lab;
+            if (aux.isLaboratorio())
+            {lab="si"; 
+            }else{lab="no";}
+             text[4].setText(lab);
+             text[5].setText(aux.getSeccion());
+             boton_confirmar.setVisible(true);
+             cancelar.setVisible(true);
+             //
+             
+             
+             String pre="";
+                 int curso_primero=0;
+                     int curso_primerop=0;
+                     int pre_contador=0;
+                     int pos_contador=0;
+                    if (aux.pre_siguiente==null) 
+                        {
+                          
+                        }else{
+                    
+                     curso_primero =aux.pre_siguiente.getCodigo();
+                   
+                    if (aux2.pos_siguiente==null) {
+                        
+                    }else{  curso_primerop=aux2.pos_siguiente.getCodigo();}}
+                    //recorer pre
+             do
+                    {
+                   if (aux.pre_siguiente==null) 
+                        {
+                            break;
+                        }
+                        if (pre.equals("")) {
+                            pre=""+aux.pre_siguiente.getCodigo();
+                        }else{
+                       pre=pre.concat(","+aux.pre_siguiente.getCodigo());}
+                        pre_contador++;
+                        
+                        Curso x=aux.pre_siguiente.pre_siguiente;
+                        
+                        if (x==null) 
+                        {
+                            
+                        }else{
+                     aux.pre_siguiente=aux.pre_siguiente.pre_siguiente;}
+                     
+                     
+                     if (aux.pre_siguiente==null&&pre_contador==1) {
+                         
+                            break;
+                        }
+                     
+                    }while(aux.pre_siguiente.getCodigo()!=curso_primero);
+                     
+                    //recorer pos
+                    
+                      String pos="";
+                     do
+                    {
+                  
+                        if (aux2.pos_siguiente==null) 
+                        {
+                            break;
+                        }
+                        if (pos.equals("")) {
+                            pos=""+aux2.pos_siguiente.getCodigo();
+                        }else{
+                        pos=pos.concat(","+aux2.pos_siguiente.getCodigo());}
+                        
+                         pos_contador++;
+      
+                        Curso a=aux2.pos_siguiente.pos_siguiente;
+                        if (a==null) {
+                            
+                        }else{
+                     aux2.pos_siguiente=aux2.pos_siguiente.pos_siguiente;
+                        }
+                     
+                     
+                     
+                        if (aux2.pos_siguiente==null&&pos_contador==1) {
+                            break;
+                        }
+                         
+                    }while(aux2.pos_siguiente.getCodigo()!=curso_primerop);
+                                 
+            
+                     
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             //recorer pre y pos
+           
+            text[6].setText(pre);
+            text[7].setText(pos);
+            boton_confirmar.setVisible(true);
+            
+            text[0].setEditable(false);
+            validacion=false;
+            break;
+            }
+            aux2=aux2.siguiente;
+             aux=aux.siguiente;
+            
+             
+
+            } while (aux != archivo.curso_primero);
+            if (validacion) 
+            {
+                JOptionPane.showMessageDialog(null, "No se encontro al curso", "ALERTA", JOptionPane.WARNING_MESSAGE);
+            }else   {  for (int i = 1; i < 8; i++)
+                    {
+                  
+                    text[i].setEditable(true);
+                    }}
+            }catch(Exception z){  JOptionPane.showMessageDialog(null, "llene el campo", "ALERTA", JOptionPane.WARNING_MESSAGE);}}
+       
+       
+       };
+       buscar.addActionListener(buscar_action);
+       ActionListener cancelar_accion = new ActionListener() {
+            @Override
+
+            
+            public void actionPerformed(ActionEvent e){
+                for (int i = 0; i < 8; i++) 
+                {
+                 text[i].setText("");
+                 text[i].setVisible(false);
+                }
+                text[0].setVisible(true);
+                text[0].setEditable(true);
+                cancelar.setVisible(false);
+                boton_confirmar.setVisible(false);
+            }};
+       
+    pintar.add(cancelar);
+    cancelar.addActionListener(cancelar_accion);
+   
+         ActionListener eliminar_accion = new ActionListener() {
+            @Override
+
+            
+            public void actionPerformed(ActionEvent e)
+            {
+                Curso aux=archivo.curso_primero;
+        boolean validacion=false;
+        
+//        if(archivo.curso_primero.getCodigo()==Integer.valueOf(text[0].getText()))
+//        { 
+//        archivo.curso_primero= archivo.curso_primero.siguiente; archivo.curso_tamano--;
+//        
+//        }
+//            else
+        {
+            do
+            {
+                if (aux.siguiente.getCodigo()==Integer.valueOf(text[0].getText())) 
+                {
+                    validacion=true;
+                    break;
+                }
+                aux=aux.siguiente;
+            }while( aux.siguiente!=Archivo.curso_primero);
+            if (validacion) {
+                
+                aux.siguiente=aux.siguiente.siguiente; Archivo.curso_tamano--;
+//cambiar el valor del ultimo :v
+                if (aux.siguiente!=null)
+                {
+                Archivo.curso_ultimo=aux;
+                }
+            }
+            else
+            {
+                    System.out.println("no hay dato ");}  
+            }
+         
+            
+            
+            
+         
+        marco.setVisible(false);
+            add();}};
+   boton_confirmar.addActionListener(eliminar_accion);
+   
+   
+   
+   
+   }
    
    
       public void solo_numero(JTextField a) {
@@ -1028,7 +1893,7 @@ public class Administrador extends JFrame
         });
 
     }
-    
+ 
  
 }
 
