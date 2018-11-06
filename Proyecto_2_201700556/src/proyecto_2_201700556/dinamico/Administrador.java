@@ -239,6 +239,7 @@ public class Administrador extends JFrame
        solo_numero(text[0]);
        solo_numero(text[1]);
        solo_numero(text[5]);
+     
     
     datos[0].setText("Carnet");
     datos[1].setText("DPI");
@@ -773,7 +774,7 @@ public class Administrador extends JFrame
             archivo.estudiante_primero=archivo.estudiante_primero.siguiente; 
             archivo .estudiante_ultimo.enlazar_siguiente(archivo.estudiante_primero);
             archivo.estudiante_primero.enlazar_anterior(archivo.estudiante_ultimo);
-            
+              JOptionPane.showMessageDialog(null, "Curso eliminado", "ELIMINADO", JOptionPane.WARNING_MESSAGE);
             archivo.estudiante_tamano--;}
         else
         {
@@ -795,6 +796,7 @@ public class Administrador extends JFrame
                 aux.siguiente=aux.siguiente.siguiente;
                 
                 aux.siguiente.enlazar_anterior(aux);
+                  JOptionPane.showMessageDialog(null, "Curso eliminado", "ELIMINADO", JOptionPane.WARNING_MESSAGE);
                 archivo.estudiante_tamano--;
                
                 
@@ -1021,6 +1023,8 @@ public class Administrador extends JFrame
        solo_numero(text[3]);
        solo_numero(text[6]);
        solo_numero(text[7]);
+           solo_letra(text[2]);
+     
      
        text[0].setEditable(true);
     
@@ -1568,7 +1572,7 @@ if (text[6].getText().equalsIgnoreCase("")) {aux.enlazarsiguientepre(null);}else
     marco.setResizable(false);
     titulo.setBounds(190, 50, 150, 30);
 
-    boton_confirmar.setBounds(350, 400, 120, 30);
+    boton_confirmar.setBounds(350, 375, 120, 30);
    
     
     boton_confirmar .setBackground(Color.white);
@@ -1620,6 +1624,7 @@ if (text[6].getText().equalsIgnoreCase("")) {aux.enlazarsiguientepre(null);}else
        solo_numero(text[0]);
        solo_numero(text[1]);
        solo_numero(text[5]);
+       solo_letra(text[2]);
     
   datos[0].setText("Codigo");
     datos[1].setText("Nombre Curso");
@@ -1630,7 +1635,7 @@ if (text[6].getText().equalsIgnoreCase("")) {aux.enlazarsiguientepre(null);}else
     datos[6].setText("Pre-Requisito");
     datos[7].setText("Pos-Requisito");
    
-    cancelar.setBounds(200, 350, 120, 30);
+    cancelar.setBounds(200, 375, 120, 30);
     cancelar.setBackground(Color.white);
     
     
@@ -1669,8 +1674,9 @@ if (text[6].getText().equalsIgnoreCase("")) {aux.enlazarsiguientepre(null);}else
             if (aux.getCodigo()==Integer.valueOf(text[0].getText())) 
                 {
             
-                    for (int i = 1; i < 8; i++)
+                    for (int i = 0; i < 8; i++)
                     {
+                        text[i].setEditable(false);
                     text[i].setVisible(true);
                     }
             
@@ -1783,8 +1789,12 @@ if (text[6].getText().equalsIgnoreCase("")) {aux.enlazarsiguientepre(null);}else
             text[6].setText(pre);
             text[7].setText(pos);
             boton_confirmar.setVisible(true);
-            
-            text[0].setEditable(false);
+            text[3].setEditable(false);
+             for (int i = 0; i < 8; i++)
+                    {
+                        text[i].setEditable(false);
+                    
+                    }
             validacion=false;
             break;
             }
@@ -1797,10 +1807,10 @@ if (text[6].getText().equalsIgnoreCase("")) {aux.enlazarsiguientepre(null);}else
             if (validacion) 
             {
                 JOptionPane.showMessageDialog(null, "No se encontro al curso", "ALERTA", JOptionPane.WARNING_MESSAGE);
-            }else   {  for (int i = 1; i < 8; i++)
+            }else   {  for (int i = 0; i < 8; i++)
                     {
                   
-                    text[i].setEditable(true);
+                    text[i].setEditable(false);
                     }}
             }catch(Exception z){  JOptionPane.showMessageDialog(null, "llene el campo", "ALERTA", JOptionPane.WARNING_MESSAGE);}}
        
@@ -1835,12 +1845,15 @@ if (text[6].getText().equalsIgnoreCase("")) {aux.enlazarsiguientepre(null);}else
                 Curso aux=archivo.curso_primero;
         boolean validacion=false;
         
-//        if(archivo.curso_primero.getCodigo()==Integer.valueOf(text[0].getText()))
-//        { 
-//        archivo.curso_primero= archivo.curso_primero.siguiente; archivo.curso_tamano--;
-//        
-//        }
-//            else
+        if(archivo.curso_primero.getCodigo()==Integer.valueOf(text[0].getText()))
+        { 
+        archivo.curso_primero= archivo.curso_primero.siguiente; Archivo.curso_tamano--;
+        archivo.curso_ultimo.enlazarsiguiente(Archivo.curso_primero); 
+
+        
+          JOptionPane.showMessageDialog(null, "Curso eliminado", "ELIMINADO", JOptionPane.WARNING_MESSAGE);
+        }
+            else
         {
             do
             {
@@ -1852,7 +1865,7 @@ if (text[6].getText().equalsIgnoreCase("")) {aux.enlazarsiguientepre(null);}else
                 aux=aux.siguiente;
             }while( aux.siguiente!=Archivo.curso_primero);
             if (validacion) {
-                
+                 JOptionPane.showMessageDialog(null, "Curso eliminado", "ELIMINADO", JOptionPane.WARNING_MESSAGE);
                 aux.siguiente=aux.siguiente.siguiente; Archivo.curso_tamano--;
 //cambiar el valor del ultimo :v
                 if (aux.siguiente!=null)
@@ -1862,7 +1875,7 @@ if (text[6].getText().equalsIgnoreCase("")) {aux.enlazarsiguientepre(null);}else
             }
             else
             {
-                    System.out.println("no hay dato ");}  
+                    JOptionPane.showMessageDialog(null, "no hay curso", "ALERTA", JOptionPane.WARNING_MESSAGE);}
             }
          
             
@@ -1893,7 +1906,20 @@ if (text[6].getText().equalsIgnoreCase("")) {aux.enlazarsiguientepre(null);}else
         });
 
     }
- 
+   public void solo_letra(JTextField a) {
+        a.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (Character.isDigit(c)) {
+                    JOptionPane.showMessageDialog(null, "No Se Permiten numeros", "ALERTA", JOptionPane.WARNING_MESSAGE);
+                    e.consume();
+
+                }
+            }
+
+        });
+
+    }
  
 }
 
