@@ -96,7 +96,7 @@ public class Administrador extends JFrame
                 switch (x) {
                     case 0:
                         marco.setVisible(false);
-                        agregar_curso();
+                        agregar_estudiante();
                         break;
                     case 1:
                            marco.setVisible(false);
@@ -263,6 +263,22 @@ public class Administrador extends JFrame
                       break;    
                     } 
                 }
+                            Estudiante  aux1=archivo.estudiante_primero;
+                do{
+                    if (!archivo.estudiante_vacio()) 
+                {
+                    if (aux1.getCarnet().equals(text[0].getText())) {
+                        JOptionPane.showMessageDialog(null, "Carnet no disponible", "ALERTA", JOptionPane.WARNING_MESSAGE);
+                        permiso=false;
+                        break;
+                    }
+                }else{break;}
+                    if(archivo.estudiante_primero!=archivo.estudiante_ultimo){
+                    aux1=aux1.siguiente;}
+                        }while(aux1!=archivo.estudiante_primero);
+                
+                
+                
                 if(permiso)
                 {
                 try{
@@ -497,7 +513,7 @@ public class Administrador extends JFrame
        
    }
    public void ver_estudiante()
-      {
+   {
       JFrame marco=new JFrame("MOSTRAR ESTUDIANTES");
       JPanel pintar=new JPanel();
       
@@ -854,8 +870,9 @@ public class Administrador extends JFrame
     regresar.setBounds(400, 45, 80, 30);
     pintar.add(regresar);
     
-    
-    
+    JComboBox  combo_disparo_1=new JComboBox( );
+    combo_disparo_1.addItem("no");
+    combo_disparo_1.addItem("si");
    marco.add(pintar);
    pintar.add(titulo);
    pintar.add(boton_confirmar);
@@ -887,19 +904,23 @@ public class Administrador extends JFrame
        solo_numero(text[3]);
        solo_numero(text[6]);
        solo_numero(text[7]);
-     
+       solo_letra(text[2]);
+    solo_letra(text[5]);
        
-    
+       pintar.add(combo_disparo_1);
     datos[0].setText("Codigo");
     datos[1].setText("Nombre Curso");
     datos[2].setText("Catedratico");
     datos[3].setText("Credito");
     datos[4].setText("Laboratorio");
+    
     datos[5].setText("Seccion");
     datos[6].setText("Pre-Requisito");
     datos[7].setText("Pos-Requisito");
-   
-   
+   text[4].setVisible(false);
+   text[4].setText(" ");
+     combo_disparo_1.setBounds(150, 100+(33*4), 100, 30);
+     combo_disparo_1.setVisible(true);
    
         ActionListener confirmar = new ActionListener() {
             @Override
@@ -914,21 +935,43 @@ public class Administrador extends JFrame
                       break;    
                     } 
                 }
+                
+                Curso  aux1=archivo.curso_primero;
+                do{if (!archivo.curso_vacio()) 
+                {
+                    if (aux1.getCodigo()==Integer.valueOf(text[0].getText())) {
+                        JOptionPane.showMessageDialog(null, "Codigo de curso no disponible", "ALERTA", JOptionPane.WARNING_MESSAGE);
+                        permiso=false;
+                        break;
+                    }}else{break;}
+                if(Archivo.curso_primero!=Archivo.curso_ultimo){
+                    aux1=aux1.siguiente;}
+                        }while(aux1!=archivo.curso_primero);
+                
+                
                 if(permiso)
                 {
-                try{
+                //try{
                   
                 boolean lab=false;
-                    if (text[4].getText().equalsIgnoreCase("si"))
+                    if (combo_disparo_1.getSelectedItem().toString().equalsIgnoreCase("si"))
                     {
                         lab=true;
                     }else{lab=false;}
-                archivo.curso_agregar_final(new Curso(Integer.valueOf(text[0].getText()),text[1].getText(),text[2].getText(),Integer.valueOf(text[3].getText()),lab, text[5].getText()),datos[6].getText(),datos[7].getText());
-                    
+                    if (text[6].getText().equals("")) {
+                        text[6].setText(" ");
+                        
+                    }
+                    if (text[7].getText().equals("")) {
+                                  text[7].setText("-1");
+                        
+                    }
+                archivo.curso_agregar_final(new Curso(Integer.valueOf(text[0].getText()),text[1].getText(),text[2].getText(),Integer.valueOf(text[3].getText()),lab, text[5].getText()),text[6].getText(),text[7].getText());
+                     JOptionPane.showMessageDialog(null, "Curso creado exitosamente", "ALERTA", JOptionPane.WARNING_MESSAGE);
                     marco.setVisible(false);
                     add();
-                }catch(Exception v){ JOptionPane.showMessageDialog(null, "error al llenar los datos","alerta", JOptionPane.WARNING_MESSAGE);}}
-            
+              
+                }
             
             }};
         boton_confirmar.addActionListener(confirmar);
@@ -1002,9 +1045,8 @@ public class Administrador extends JFrame
    JTextField []text=new JTextField[8];
    int a=0;
     
-    
- 
-    
+     
+     
 
        for (int i = 0; i < 8; i++)
        {
@@ -1024,7 +1066,9 @@ public class Administrador extends JFrame
        solo_numero(text[6]);
        solo_numero(text[7]);
            solo_letra(text[2]);
+                solo_letra(text[5]);
      
+           
      
        text[0].setEditable(true);
     
@@ -1080,6 +1124,9 @@ public class Administrador extends JFrame
             text[1].setText(aux.getNombre());
             text[2].setText(aux.getCatedratico());
             text[3].setText(""+aux.getCredito());
+            
+            
+            
             String lab;
             if (aux.isLaboratorio())
             {lab="si"; 
@@ -1223,7 +1270,14 @@ public class Administrador extends JFrame
                     {permiso=false;
                         JOptionPane.showMessageDialog(null, "llene todo los campos", "ALERTA", JOptionPane.WARNING_MESSAGE);
                       break;    
-                    } 
+                    }
+                    
+                    if (text[4].getText().equalsIgnoreCase("si")||text[4].getText().equalsIgnoreCase("no")) {
+                        
+                    }else{permiso=false;  JOptionPane.showMessageDialog(null, "opcion de laboratorio no valida", "ALERTA", JOptionPane.WARNING_MESSAGE);}
+                    
+                    
+                    
                 }
               if(permiso){  
              Curso aux=archivo.curso_primero;
@@ -1524,15 +1578,15 @@ if (text[6].getText().equalsIgnoreCase("")) {aux.enlazarsiguientepre(null);}else
          
                     
                     
-                    
-       
-                   contador++;
-                   aux2=aux2.siguiente;
+              
+                   
+                  contador++;
+                        aux2=aux2.siguiente;
                     aux=aux.siguiente;
-                  
-                    
+                
+                      
                 }while(archivo.curso_primero!=aux);
-            } catch (Exception e) {System.out.println(e);
+            } catch (Exception e) {
         
         }}
             
@@ -1892,7 +1946,7 @@ if (text[6].getText().equalsIgnoreCase("")) {aux.enlazarsiguientepre(null);}else
    }
    
    
-      public void solo_numero(JTextField a) {
+   public void solo_numero(JTextField a) {
         a.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
