@@ -397,7 +397,7 @@ public void agregar_pre_final(String cadena_cursos,boolean primer_curso)
      
             
             for (int i = 0; i < Pre.length; i++) {
-    
+             
     Curso nuevo= new Curso(Integer.valueOf(Pre[i]),"","",0,false,"");
             
     if (primero==null) {
