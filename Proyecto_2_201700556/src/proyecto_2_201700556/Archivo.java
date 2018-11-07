@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
-import proyecto_2_201700556.dinamico.Administrador;
+ 
 
 
 public class Archivo 
@@ -182,7 +182,7 @@ public Archivo ()
             {
               
                JOptionPane.showMessageDialog(null, "carga completa");
-               Administrador Administrador=new Administrador();
+               Admin Administrador=new Admin();
     Administrador.add();
             }
             else{JOptionPane.showMessageDialog(null, "no hay datos que cargar");  }
@@ -197,9 +197,9 @@ public Archivo ()
     
   
     
-                }else{JOptionPane.showMessageDialog(null, "Archivo no valido");Administrador Administrador=new Administrador();Administrador.add();}}   else{Administrador Administrador=new Administrador();
+                }else{JOptionPane.showMessageDialog(null, "Archivo no valido");Admin Administrador=new Admin();Administrador.add();}}   else{Admin Administrador=new Admin();
     Administrador.add();}
-}catch (Exception c){JOptionPane.showMessageDialog(null, "archivo no valido"+ c);Administrador Administrador=new Administrador();
+}catch (Exception c){JOptionPane.showMessageDialog(null, "archivo no valido"+ c);Admin Administrador=new Admin();
     Administrador.add();}}
 
 
@@ -214,7 +214,7 @@ public void mostrar ()
        aux= aux.siguiente;
     }while (aux!=estudiante_primero);
 
-Administrador Administrador=new Administrador();
+Admin Administrador=new Admin();
     Administrador.add();
 }
 
@@ -229,7 +229,7 @@ public void mostrar2 ()
        aux= aux.anterior;
     }while (aux!=estudiante_primero.anterior);
 
-Administrador Administrador=new Administrador();
+Admin Administrador=new Admin();
     Administrador.add();
 }
 public void curso_leer()
@@ -265,9 +265,7 @@ public void curso_leer()
         curso_vacio();
         boolean estado=false;
         if(info[4].equalsIgnoreCase("si")){estado=true;}else{estado=false;}
-         
-            
-            
+          
             if (info.length==7) {
                 String z="-1";
                 
@@ -291,7 +289,7 @@ public void curso_leer()
             {
               
                JOptionPane.showMessageDialog(null, "carga completa");
-               Administrador Administrador=new Administrador();
+               Admin Administrador=new Admin();
     Administrador.add();
             }
             else{JOptionPane.showMessageDialog(null, "no hay datos que cargar");  }
@@ -306,9 +304,9 @@ public void curso_leer()
     
   
     
-                }else{JOptionPane.showMessageDialog(null, "Archivo no valido");Administrador Administrador=new Administrador();Administrador.add();}}   else{Administrador Administrador=new Administrador();
+                }else{JOptionPane.showMessageDialog(null, "Archivo no valido");Admin Administrador=new Admin();Administrador.add();}}   else{Admin Administrador=new Admin();
     Administrador.add();}
-}catch (Exception c){JOptionPane.showMessageDialog(null, "archivo no valido"+ c);Administrador Administrador=new Administrador();
+}catch (Exception c){JOptionPane.showMessageDialog(null, "archivo no valido"+ c);Admin Administrador=new Admin();
     Administrador.add();}
     
 
@@ -337,30 +335,53 @@ public void curso_agregar_final(Curso nuevo,String pre_cursos,String pos_cursos)
             curso_ultimo = nuevo;
               if (pre_cursos.equals(" ")) {}else{agregar_pre_final( pre_cursos,false); }
              if (pos_cursos.equals("-1")) {}else{agregar_pos_final(pos_cursos,false);}      
-        }
+        }curso_tamano++;
+        
+          
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+            String pas_catedratico="";
+            
+            
+            String aux=curso_ultimo.getCatedratico();
+            StringTokenizer stPalabras = new StringTokenizer(aux);
+            while (stPalabras.hasMoreTokens()) {
+            aux = stPalabras.nextToken();
+                pas_catedratico=pas_catedratico+aux.substring(0,1).toLowerCase();
+                
+                
+             
+               
+                
+            }
+            
+            
+            
        
-        curso_tamano++;
+                 Random aleatorio = new Random();
+        int numero = 50 + aleatorio.nextInt(100);
+       
+                  pas_catedratico= pas_catedratico+numero;        
+                    
+                    
+                    
+            catedratico_agregar_final(new Catedratico( curso_ultimo.getCatedratico(), pas_catedratico));
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
 }
 public void catedratico_agregar_final(Catedratico nuevo)
@@ -465,27 +486,22 @@ public void mostrar3()
 {
     
     
-    Curso aux;
-      aux=curso_primero;
+    Catedratico aux;
+      aux=catedratico_primero;
       
       do{
-          System.out.println(aux.getCodigo()+"    ,  "+aux.getNombre());
+          System.out.println(aux.getNombre()+"    ,  "+aux.getPassword());
           
-          Curso aux2=aux;
-          
+         
           
           
          // while(aux2.pre_siguiente!=null)
-          do{
-             System.out.print(aux2.pre_siguiente.getCodigo()+" ,");
-             
-             aux2.pre_siguiente=aux2.pre_siguiente.pre_siguiente;
-          }while(aux2.pre_siguiente!=aux.pre_siguiente);
+        
           
           System.out.println("");
           
       aux=aux.siguiente;
-      }while(aux!=curso_primero);
+      }while(aux!=catedratico_primero);
       
       
 
