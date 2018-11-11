@@ -268,8 +268,9 @@ public void curso_leer()
           
             if (info.length==7) {
                 String z="-1";
+                String x="";
                 
-                  curso_agregar_final(new Curso(Integer.valueOf(info[0]),info[1],info[2],Integer.valueOf(info[3]),estado,info[5]),info[6],z);
+                  curso_agregar_final(new Curso(Integer.valueOf(info[0]),info[1],info[2],Integer.valueOf(info[3]),estado,info[5],info[6],x),info[6],z);
             }
              
             
@@ -277,7 +278,7 @@ public void curso_leer()
             else{
  
                
-        curso_agregar_final(new Curso(Integer.valueOf(info[0]),info[1],info[2],Integer.valueOf(info[3]),estado,info[5]),info[6],info[7]);
+        curso_agregar_final(new Curso(Integer.valueOf(info[0]),info[1],info[2],Integer.valueOf(info[3]),estado,info[5],info[6],info[7]),info[6],info[7]);
             }
         }
 
@@ -405,6 +406,7 @@ public void catedratico_agregar_final(Catedratico nuevo)
             
             
             catedratico_ultimo = nuevo;
+            
         }
        
         catedratico_tamano++;
@@ -419,7 +421,7 @@ public void agregar_pre_final(String cadena_cursos,boolean primer_curso)
             
             for (int i = 0; i < Pre.length; i++) {
              
-    Curso nuevo= new Curso(Integer.valueOf(Pre[i]),"","",0,false,"");
+    Curso nuevo= new Curso(Integer.valueOf(Pre[i]),"","",0,false,"","","");
             
     if (primero==null) {
              primero= nuevo;
@@ -454,7 +456,7 @@ public void agregar_pos_final(String cadena_pos,boolean primer_curso)
             
             for (int i = 0; i < pos.length; i++) {
     
-    Curso nuevo= new Curso(Integer.valueOf(pos[i]),"","",0,false,"");
+    Curso nuevo= new Curso(Integer.valueOf(pos[i]),"","",0,false,"","","");
             
     if (primero==null) {
              primero= nuevo;
