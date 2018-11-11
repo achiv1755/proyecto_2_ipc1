@@ -27,12 +27,16 @@ public class Estudiante extends Usuario {
     Semestre semestre_buscado;
     JFrame marco2 = new JFrame();
     JLabel desasignar[] = new JLabel[4];
-    public Semestre primer_semestre;
-    public Semestre ultimo_semestre;
+   static public Semestre primer_semestre;
+   static  public Semestre ultimo_semestre;
     public int semestre_tamano;
     JPanel pintar = new JPanel();
+      JPanel pintar_tabla = new JPanel();
     public Estudiante siguiente;
     public Estudiante anterior;
+   
+    JPanel pintar20=new JPanel();
+   
 
     public Estudiante() {
     }
@@ -174,7 +178,10 @@ public class Estudiante extends Usuario {
 
             public void actionPerformed(ActionEvent e) {
                 marco.setVisible(false);
-                asignar_curso();
+                asignar_curso asignar_curso=new asignar_curso();
+                asignar_curso.main();
+// asignar_curso();
+              
             }
         };
 
@@ -199,16 +206,17 @@ public class Estudiante extends Usuario {
         JLabel titulo = new JLabel("ASIGNAR CURSO");
 
         JButton boton_confirmar = new JButton("CONFIRMAR");
-
+pintar20.setBounds(0, 200, 1200, 400);
         marco2.setVisible(true);
         marco2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pintar.setVisible(true);
-        marco2.setBounds(200, 100, 1200, 1200);
-        
-        pintar.setBackground(Color.red);
-        pintar.setBounds(200, 100, 500, 300);
-       
-        
+        marco2.setBounds(200, 100, 1200, 600);
+        pintar20.setLayout(null);
+        marco2.add(pintar20);
+      //  pintar20.setBackground(Color.blue);
+      //  pintar.setBackground(Color.red);
+        pintar.setBounds(0, 0, 1200, 200);
+       marco2.setLayout(null);
         pintar.setLayout(null);
         marco2.setResizable(false);
         titulo.setBounds(600, 50, 150, 30);
@@ -236,7 +244,7 @@ public class Estudiante extends Usuario {
         box_semestre.addItem("");
         box_semestre.addItem("Primer Semestre");
         box_semestre.addItem("Segundo Semestre");
-
+       
         box_curso.addItem("");
 
         box_year.addItem("");
@@ -292,7 +300,7 @@ public class Estudiante extends Usuario {
                     }
                     // mostrardasda();
                     // System.out.println("ff");
-                    mostrar_tabla20();
+                    //mostrar_tabla20();
 
                 }
 
@@ -315,7 +323,7 @@ public class Estudiante extends Usuario {
         pintar.add(titulo);
 
         pintar.add(boton_confirmar);
-
+        mostrar_tabla20();
         ItemListener year = new ItemListener() {
             public void itemStateChanged(ItemEvent w) {
                 if (!year_curso.equals((String) box_year.getSelectedItem())) {
@@ -398,7 +406,23 @@ public class Estudiante extends Usuario {
         });
 
     }
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     private Semestre buscar_semestre(String year_curso, String semestre_curso) {
         if (Semestre_vacio()) {
             return null;
@@ -538,17 +562,16 @@ public class Estudiante extends Usuario {
             }
         };
         JTable lista_usuario = new JTable(tabla);
-        lista_usuario.enable(false);
+        //lista_usuario.enable(false);
         JScrollPane scroll = new JScrollPane(lista_usuario);
         scroll.repaint();
 
-        scroll.setBounds(100, 200, 1000, 150);
-        pintar.add(scroll);
+        scroll.setBounds(50, 50, 1000, 150);
+       // scroll.setFocusable(true);
+        pintar20.add(scroll);
         
-        JPanel panel2 =new JPanel();
-        panel2.setBounds(200, 600, 500, 300);
-        panel2.setBackground(Color.yellow);
-        marco2.add(panel2);
+       
+      // marco2.add(pintar20);
 
     }
 
