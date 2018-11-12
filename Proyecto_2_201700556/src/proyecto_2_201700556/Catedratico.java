@@ -34,6 +34,7 @@ public Catedratico (String nombre, String password)
 
 }
 
+
     public String getNombre() {
         return nombre;
     }
@@ -58,6 +59,8 @@ public void enlazarsiguiente(Catedratico siguiente){this.siguiente=siguiente;}
     
     public void pagina_principal()
     {
+        System.out.println(nombre);
+        System.out.println(password);
         JFrame marco=new JFrame("CATEDRATICO");
         JPanel panel=new JPanel();
         JLabel log_out=new JLabel("LOG OUT");
@@ -88,8 +91,12 @@ public void enlazarsiguiente(Catedratico siguiente){this.siguiente=siguiente;}
 
             public void actionPerformed(ActionEvent e) {
                 marco.setVisible(false);
-               Ingresar_Nota a=new Ingresar_Nota();
-                a.main();
+               Ingresar_Nota a=new Ingresar_Nota(nombre);
+               
+                  //  System.out.println("el nombre es:"+ nombre);
+                //System.out.println(nombre);
+               
+                a.m();
             }
         };
         boton.addActionListener(agregar_nota);
