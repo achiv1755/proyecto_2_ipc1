@@ -17,18 +17,40 @@ public class Ingresar_Nota extends Catedratico {
     String year_curso = "";
     String semestre_curso = "";
     String Curso_curso = "";
-
+    static  String nombre_2;
     int contador_cursos = 0;
     Semestre semestre_buscado;
     DefaultTableModel tabla_1;
+    public Ingresar_Nota(String nombre){ 
+nombre_2=nombre;
+     
+    }
     public Ingresar_Nota() {
-        initComponents();
+         
+        initComponents( );
          String data[][] = new String[0][3];
     String tituloo[] = {"Carnet", "Nombre", "Nota"};
     tabla_1=new DefaultTableModel(data, tituloo);
- 
+
     this.tabla.setModel(tabla_1);
     }
+
+    public String getNombre_2() {
+        return nombre_2;
+    }
+//    public void ingresarnombre(String nombre)
+//{System.out.println(nombre);
+//nombre_2=nombre;
+//    
+//   
+//      
+//m( );
+//}
+
+    public void setNombre_2(String nombre_2) {
+        this.nombre_2 = nombre_2;
+    }
+    
     
 
     /**
@@ -210,7 +232,7 @@ public class Ingresar_Nota extends Catedratico {
         if (!Archivo.curso_vacio()) {
             Curso aux = Archivo.curso_primero;
             do {
-                if  (nombre.equalsIgnoreCase(aux.getCatedratico())){
+                if  (nombre_2.equalsIgnoreCase(aux.getCatedratico())){
                     combo_curso.addItem(aux.getNombre());}
                 aux = aux.siguiente;
             } while (Archivo.curso_primero != aux);
@@ -252,7 +274,7 @@ public class Ingresar_Nota extends Catedratico {
  setVisible(false);
 Catedratico e=new Catedratico() ;
         
-    
+         
 e.pagina_principal();
     }//GEN-LAST:event_jLabel3MouseClicked
 
@@ -280,15 +302,9 @@ year_curso=(String)combo_year.getSelectedItem();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public  void main() {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+  
+    public  void m() {
+  
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -305,9 +321,6 @@ year_curso=(String)combo_year.getSelectedItem();
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Ingresar_Nota.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Ingresar_Nota().setVisible(true);
@@ -346,7 +359,9 @@ year_curso=(String)combo_year.getSelectedItem();
              
          }else{
          do {
+             System.out.println(recorer_semestre(aux_estudiante));
              if (recorer_semestre(aux_estudiante)) {
+                 System.out.println("hola");
                contador++;
                 
                 
@@ -358,8 +373,9 @@ year_curso=(String)combo_year.getSelectedItem();
         String data[][] = new String[contador][3];
         
               do {
+                  System.out.println("recore todo lol");
              if (recorer_semestre(aux_estudiante)) {
-                 
+                 System.out.println("encontro al estudiantre");
                   data[contador2][0] = "" + aux_estudiante.getCarnet();
                     data[contador2][1] = aux_estudiante.getNombre();
                     Double nota=recorer_semestre_nota(aux_estudiante);

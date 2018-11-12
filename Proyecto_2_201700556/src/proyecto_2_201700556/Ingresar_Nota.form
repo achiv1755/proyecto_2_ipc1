@@ -240,7 +240,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="combo_cursoActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="Archivo Archivo=new Archivo();&#xa;if (!Archivo.curso_vacio()) {&#xa;            Curso aux = Archivo.curso_primero;&#xa;            do {&#xa;                if  (nombre.equalsIgnoreCase(aux.getCatedratico())){&#xa;               combo_curso.addItem(aux.getNombre());}&#xa;                aux = aux.siguiente;&#xa;            } while (Archivo.curso_primero != aux);&#xa;        }"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="Archivo Archivo=new Archivo();&#xa;if (!Archivo.curso_vacio()) {&#xa;            Curso aux = Archivo.curso_primero;&#xa;            do {&#xa;                if  (nombre_2.equalsIgnoreCase(aux.getCatedratico())){&#xa;               combo_curso.addItem(aux.getNombre());}&#xa;                aux = aux.siguiente;&#xa;            } while (Archivo.curso_primero != aux);&#xa;        }"/>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
