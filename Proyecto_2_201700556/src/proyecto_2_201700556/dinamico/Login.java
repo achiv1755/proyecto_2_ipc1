@@ -17,6 +17,8 @@ import proyecto_2_201700556.*;
  */
 public class Login
 {
+    
+    Admin admin=new Admin();
     JPanel login=new JPanel();
     JLabel titulo_login =new JLabel();
     JLabel usuario_label=new JLabel();
@@ -25,6 +27,7 @@ public class Login
     JPasswordField contrasena_texto= new JPasswordField();
     JButton boton_login=new JButton();
     JFrame pintura=new JFrame();
+    
  
     public Login(){
         
@@ -68,6 +71,7 @@ public class Login
         boton_login.setBounds(330, 280, 100, 25);
         boton_login.setBackground(Color.white);
         
+        
     }
     public void buscar()
     {
@@ -77,10 +81,14 @@ public class Login
 
             public void actionPerformed(ActionEvent e) {
                
-                
-                 Archivo m=new Archivo();
-                 m.Estudiantes_Leer();
-                
+                if (usuario_texto.getText().equalsIgnoreCase(admin.getNombre())&&contrasena_texto.getText().equalsIgnoreCase(admin.getPassword())) {
+                   
+                    pintura.setVisible(false);
+                    admin.add();
+                }
+                else if (buscar_estudiante(usuario_texto.getText(),contrasena_texto.getText())){buscar_estudiante_dato(usuario_texto.getText(),contrasena_texto.getText());}
+                else if (buscar_catedratico(usuario_texto.getText(),contrasena_texto.getText())){buscar_catedratico_dato(usuario_texto.getText(),contrasena_texto.getText());}
+                else{ JOptionPane.showMessageDialog(null, "Usuario no encontrado", "alerta", JOptionPane.WARNING_MESSAGE);}
 
                 
             }
@@ -90,5 +98,80 @@ public class Login
     
     
     }
+    private boolean buscar_estudiante(String nombre,String contraseña)
+    { Estudiante aux=Archivo.estudiante_primero;
+        if (aux==null) {
+            return false;
+        }else{
+        
+        do {
+            if (nombre.equalsIgnoreCase(aux.getCarnet())&&contraseña.equalsIgnoreCase(aux.getPassword())) {
+                return  true;
+            }
+            aux=aux.siguiente;
+        } while (aux!=Archivo.estudiante_primero&&Archivo.estudiante_primero!=Archivo.estudiante_ultimo);}
+        
+    
+    return false;
+    }
+    private boolean buscar_catedratico(String nombre,String contraseña)
+    {  Catedratico aux=Archivo.catedratico_primero;
+        if (aux==null) {
+            return false;
+        }else{
+        do {
+            
+          if (nombre.equalsIgnoreCase(aux.getNombre())&&contraseña.equalsIgnoreCase(aux.getPassword()))
+          {
+              return true;
+            }
+            
+            aux=aux.siguiente;
+        } while (aux!=Archivo.catedratico_primero&&Archivo.catedratico_primero!=Archivo.catedratico_ultimo);}
+        
+    return false;
+    }
+    
+    
+    
+    
+       private  void buscar_estudiante_dato(String nombre,String contraseña)
+    {
+        Estudiante aux=Archivo.estudiante_primero;
+        do {
+            if (nombre.equalsIgnoreCase(aux.getCarnet())&&contraseña.equalsIgnoreCase(aux.getPassword())) {
+               pintura.setVisible(false);
+                
+                    Estudiante a=new Estudiante(aux.getCarnet(), aux.getDPI(), aux.getNombre(),aux.getCorreo(),aux.getDireccion(),aux.getCredito(), aux.getPassword());
+              a.pagina_principal();
+                            
+               
+            }
+            aux=aux.siguiente;
+        } while (aux!=Archivo.estudiante_primero&&Archivo.estudiante_primero!=Archivo.estudiante_ultimo);
+        
+     
+    }
+    private void buscar_catedratico_dato(String nombre,String contraseña)
+    {  Catedratico aux=Archivo.catedratico_primero;
+    
+        do {
+            
+          if (nombre.equalsIgnoreCase(aux.getNombre())&&contraseña.equalsIgnoreCase(aux.getPassword()))
+          {
+              pintura.setVisible(false);
+              Catedratico a=new Catedratico(aux.getNombre(),aux.getPassword());
+              a.pagina_principal(); 
+               
+              
+            }
+            
+            aux=aux.siguiente;
+        } while (aux!=Archivo.catedratico_primero&&Archivo.catedratico_primero!=Archivo.catedratico_ultimo);
+        
+  
+    }
+    
+    
     
 }
