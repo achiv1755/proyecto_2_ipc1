@@ -18,6 +18,10 @@ public class Curso
  boolean laboratorio;
  String seccion;
  boolean estado;
+ String pre_credito;
+ String pos_credito;
+ Double nota;
+ 
  
   public Curso siguiente;
   public Curso pre_siguiente;
@@ -25,7 +29,7 @@ public class Curso
  
   
   
-  public Curso (int codigo,String nombre,String catedratico,int credito,boolean laboratorio,String seccion)
+  public Curso (int codigo,String nombre,String catedratico,int credito,boolean laboratorio,String seccion,String pre_credito,String pos_credito)
   {
   this.codigo=codigo;
   this.nombre=nombre;
@@ -33,13 +37,40 @@ public class Curso
   this.credito=credito;
   this.laboratorio =laboratorio;
   this.estado=false;
+  this.nota=0.0;
   pre_siguiente=null;
   siguiente=null;
   pos_siguiente=null;
   this.seccion=seccion;
+  this.pre_credito=pre_credito;
+  this. pos_credito=pos_credito;
   
   
   }
+
+    public Double getNota() {
+        return nota;
+    }
+
+    public void setNota(Double nota) {
+        this.nota = nota;
+    }
+
+    public String getPre_credito() {
+        return pre_credito;
+    }
+
+    public void setPre_credito(String pre_credito) {
+        this.pre_credito = pre_credito;
+    }
+
+    public String getPos_credito() {
+        return pos_credito;
+    }
+
+    public void setPos_credito(String pos_credito) {
+        this.pos_credito = pos_credito;
+    }
 
     public String getSeccion() {
         return seccion;
