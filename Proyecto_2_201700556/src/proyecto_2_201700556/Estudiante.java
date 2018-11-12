@@ -22,13 +22,13 @@ public class Estudiante extends Usuario {
     String year_curso = "";
     String semestre_curso = "";
     String Curso_curso = "";
-
+    
     int contador_cursos = 0;
     Semestre semestre_buscado;
     JFrame marco2 = new JFrame();
     JLabel desasignar[] = new JLabel[4];
-   static public Semestre primer_semestre;
-   static  public Semestre ultimo_semestre;
+    public Semestre primer_semestre;
+     public Semestre ultimo_semestre;
     public int semestre_tamano;
     JPanel pintar = new JPanel();
       JPanel pintar_tabla = new JPanel();
@@ -36,13 +36,14 @@ public class Estudiante extends Usuario {
     public Estudiante anterior;
    
     JPanel pintar20=new JPanel();
-   
+ 
 
     public Estudiante() {
     }
 
     public Estudiante(String carnet, String DPI, String nombre, String correo, String direccion, int Credito, String password) {
         this.carnet = carnet;
+        
         this.DPI = DPI;
         this.nombre = nombre;
         this.correo = correo;
@@ -53,6 +54,7 @@ public class Estudiante extends Usuario {
         anterior = null;
         primer_semestre = null;
         ultimo_semestre = null;
+        
     }
 
     public String getCarnet() {
@@ -168,8 +170,7 @@ public class Estudiante extends Usuario {
 
             public void actionPerformed(ActionEvent e) {
                 //marco.setVisible(false);
-                Admin a = new Admin();
-                a.add();
+                  x();
             }
         };
 
@@ -178,8 +179,11 @@ public class Estudiante extends Usuario {
 
             public void actionPerformed(ActionEvent e) {
                 marco.setVisible(false);
-                asignar_curso asignar_curso=new asignar_curso();
-                asignar_curso.main();
+                asignar_curso asignar_curso=new asignar_curso( );
+            
+                
+                asignar_curso.setCarnet_2(carnet);
+                asignar_curso.m( carnet);
  
               
             }
@@ -198,4 +202,36 @@ public class Estudiante extends Usuario {
 
     }
      
+    public void x()
+    {
+    Estudiante a=Archivo.estudiante_primero;
+        System.out.println("hola");
+        do {
+            
+            if (a.getCarnet().equals(carnet)) 
+            {
+                Semestre b=a.primer_semestre;
+                do {
+                    
+                      System.out.println(b.getSemestre()+"  "+b.getYear()+"  "+b.getCurso_tamano());  
+                   
+                    
+                    
+                    b=b.siguiente_semestre;
+                } while (b!=a.primer_semestre&&a.primer_semestre!=a.ultimo_semestre);
+                
+                
+                
+            }
+            
+            
+            
+            
+            
+            a=a.siguiente;
+        } while (a!=Archivo.estudiante_primero&&Archivo.estudiante_primero!=Archivo.estudiante_ultimo);
+        
+    
+    
+    }
 }
