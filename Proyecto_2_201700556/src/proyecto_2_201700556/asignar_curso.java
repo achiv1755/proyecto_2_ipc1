@@ -11,19 +11,30 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import proyecto_2_201700556.dinamico.Login;
 public class asignar_curso extends Estudiante{
-
+    
+   
     DefaultTableModel tabla_1;
+    static  String carnet_2;
+    
     public asignar_curso() {
         
         initComponents();
         setBounds(80, 80, 1200, 600);
         setResizable(false);
-  
+          /// carnetlab.setText();
     String data[][] = new String[0][8];
     String tituloo[] = {"Codigo", "Curso", "Catedratico", "Credito", "Lab", "Seccion", "Pre-requisito", "Pos-requitito"};
     tabla_1=new DefaultTableModel(data, tituloo);
-
+ 
     this.tabla.setModel(tabla_1);
+    }
+
+    public String getCarnet_2() {
+        return carnet_2;
+    }
+
+    public void setCarnet_2(String carnet_2) {
+        this.carnet_2 = carnet_2;
     }
 
     /**
@@ -51,10 +62,10 @@ public class asignar_curso extends Estudiante{
         log_out = new javax.swing.JButton();
         regresar = new javax.swing.JButton();
         combo_semestre = new javax.swing.JComboBox<>();
+        carnetlab = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panel1.setBackground(new java.awt.Color(255, 153, 0));
         panel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         titulo.setText("ASIGNAR CURSOS");
@@ -177,6 +188,8 @@ public class asignar_curso extends Estudiante{
             }
         });
 
+        carnetlab.setText(" ");
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -189,9 +202,9 @@ public class asignar_curso extends Estudiante{
                         .addGap(251, 251, 251))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                         .addComponent(text_desasignar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1)
-                        .addGap(99, 99, 99))))
+                        .addGap(94, 94, 94))))
             .addGroup(panel1Layout.createSequentialGroup()
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel1Layout.createSequentialGroup()
@@ -199,9 +212,15 @@ public class asignar_curso extends Estudiante{
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 66, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addGap(503, 503, 503)
-                        .addComponent(titulo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addGap(503, 503, 503)
+                                .addComponent(titulo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(carnetlab, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(111, 111, 111)))
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(log_out)
                             .addComponent(regresar))))
@@ -231,8 +250,13 @@ public class asignar_curso extends Estudiante{
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(log_out)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(log_out))
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(carnetlab)))
                 .addGap(18, 18, 18)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(titulo)
@@ -290,7 +314,9 @@ public class asignar_curso extends Estudiante{
     }// </editor-fold>//GEN-END:initComponents
 
     private void boton_asignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_asignarActionPerformed
- if (combo_semestre.getSelectedItem().equals("") || combo_year.getSelectedItem().equals("") || combo_curso.getSelectedItem().equals("")) {
+
+        
+        if (combo_semestre.getSelectedItem().equals("") || combo_year.getSelectedItem().equals("") || combo_curso.getSelectedItem().equals("")) {
                    JOptionPane.showMessageDialog(null, "Llene todos los campos");
                 }else if (contador_cursos == 3) {
                 JOptionPane.showMessageDialog(null, "Limite de cursos asignados", "ALERTA", JOptionPane.WARNING_MESSAGE);
@@ -300,8 +326,30 @@ public class asignar_curso extends Estudiante{
                    if (aux_de_semestre == null) {
 
                       //se crea el semestre
+                      
+                      
+                      
+                      
+                      
+                         aux_estudiante=recorer_estudiante();
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+                         
                         agregar_semestre(new Semestre(semestre_curso, year_curso));
 
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         //se crea el curso
                     }
 
@@ -318,9 +366,9 @@ public class asignar_curso extends Estudiante{
 
                     }
                     Semestre aux_de_sumar_cursos = buscar_semestre(year_curso, semestre_curso);
-                    if (aux_de_sumar_cursos == primer_semestre) {
+                    if (aux_de_sumar_cursos == aux_estudiante.primer_semestre) {
 
-                        contador_cursos = primer_semestre.curso_tamano;
+                        contador_cursos = aux_estudiante.primer_semestre.curso_tamano;
                            mostrar_tabla20();
                         tabla.repaint();
                        
@@ -348,7 +396,7 @@ public class asignar_curso extends Estudiante{
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        try{
-           System.out.println(contador_cursos);
+           
         if (contador_cursos!=0) {
             
        
@@ -456,7 +504,11 @@ e.pagina_principal();
     }//GEN-LAST:event_combo_semestreActionPerformed
 
     private void combo_semestreItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo_semestreItemStateChanged
+
         String semestre_aux=semestre_curso;
+        if (!"".equals((String) combo_semestre.getSelectedItem())&&!"".equals((String) combo_year.getSelectedItem())) {
+            
+        
         if (!semestre_curso.equals((String) combo_semestre.getSelectedItem())) {
                    
     
@@ -465,7 +517,7 @@ e.pagina_principal();
                 semestre_curso = (String) combo_semestre.getSelectedItem();
                 
                 
-                if (!semestre_aux.equals(semestre_curso)) 
+                if (!semestre_aux.equals(semestre_curso) ) 
                 {
                       Semestre semestre2 = buscar_semestre(year_curso, semestre_curso);
                          if (semestre2!=semestre_buscado) {
@@ -491,7 +543,7 @@ e.pagina_principal();
     }
                          
                 
-                }
+                }}
                 if (semestre_buscado==null) 
                 {
                     contador_cursos=0;
@@ -519,7 +571,7 @@ e.pagina_principal();
     String semestre_aux=year_curso;
         
         
-        
+          if (!"".equals((String) combo_semestre.getSelectedItem())&&!"".equals((String) combo_year.getSelectedItem())) {
         if (!year_curso.equals((String) combo_year.getSelectedItem())) {
            
                 }
@@ -556,7 +608,7 @@ e.pagina_principal();
         
                 
                 
-                }
+                }}
                         if (semestre_buscado==null) 
                 {
                           contador_cursos=0;
@@ -568,7 +620,8 @@ e.pagina_principal();
     }//GEN-LAST:event_combo_yearItemStateChanged
 
     private void combo_cursoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo_cursoItemStateChanged
-      Curso_curso = (String) combo_curso.getSelectedItem();
+      
+        Curso_curso = (String) combo_curso.getSelectedItem();
                 combo_curso.setFocusable(true);
     }//GEN-LAST:event_combo_cursoItemStateChanged
 
@@ -576,15 +629,13 @@ e.pagina_principal();
      
     }//GEN-LAST:event_combo_semestreFocusLost
 
-    /**
-     * @param args the command line arguments
-     */
-    public  void main() {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+   
+    public  void m(String carnet ) {
+        
+         
+         
+        
+     
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -602,7 +653,7 @@ e.pagina_principal();
             java.util.logging.Logger.getLogger(asignar_curso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -613,6 +664,7 @@ e.pagina_principal();
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton boton_asignar;
+    private javax.swing.JLabel carnetlab;
     private javax.swing.JComboBox<String> combo_curso;
     private javax.swing.JComboBox<String> combo_semestre;
     private javax.swing.JComboBox<String> combo_year;
@@ -629,36 +681,61 @@ e.pagina_principal();
     private javax.swing.JTextField text_desasignar;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
- private Semestre buscar_semestre(String year_curso, String semestre_curso) {
+ Estudiante aux_estudiante;
+ Semestre aux_semestre;
+ Curso aux_curso;
+ 
+    private Semestre buscar_semestre(String year_curso, String semestre_curso) {
         if (Semestre_vacio()) {
             return null;
         } else {
-            Semestre aux = primer_semestre;
+            Semestre aux = recorer_estudiante().primer_semestre;
             do {
                 if (aux.getSemestre().equals(semestre_curso) && aux.getYear().equals(year_curso)) {
-
+                    aux_semestre=aux;
                     return aux;
                 }
                 aux = aux.siguiente_semestre;
-            } while (aux != primer_semestre && primer_semestre != ultimo_semestre);
+            } while (aux !=  recorer_estudiante().primer_semestre &&  recorer_estudiante().primer_semestre !=  recorer_estudiante().ultimo_semestre);
 
         }
         return null;
 
     }
+ private Estudiante recorer_estudiante()
+         
+ {   
+     Estudiante aux=Archivo.estudiante_primero;
+     do { 
+         
+         if (aux.getCarnet().equalsIgnoreCase(carnet_2))
+         {    
+              aux_estudiante=aux;
+             return aux;
+         }
+         
+         
+         
+         
+         aux=aux.siguiente;
+     } while (aux!=Archivo.estudiante_primero&&Archivo.estudiante_primero!=Archivo.estudiante_ultimo);
+      return null;
+ 
+ }
     private void agregar_semestre(Semestre nuevo) {
-        Semestre aux = primer_semestre;
+        
+      
         // Consulta si la lista esta vacia.
         if (Semestre_vacio()) {
-
-            primer_semestre = nuevo;
-            ultimo_semestre = nuevo;
-            ultimo_semestre.enlazar_siguiente_semestre(primer_semestre);
+            
+            aux_estudiante.primer_semestre = nuevo;
+             aux_estudiante.ultimo_semestre = nuevo;
+         aux_estudiante.ultimo_semestre.enlazar_siguiente_semestre(primer_semestre);
 
         } else {
-            ultimo_semestre.enlazar_siguiente_semestre(nuevo);
-            nuevo.enlazar_siguiente_semestre(primer_semestre);
-            ultimo_semestre = nuevo;
+           aux_estudiante.ultimo_semestre.enlazar_siguiente_semestre(nuevo);
+            nuevo.enlazar_siguiente_semestre( aux_estudiante.primer_semestre);
+             aux_estudiante.ultimo_semestre = nuevo;
 
         }
         semestre_buscado = nuevo;
@@ -751,11 +828,15 @@ e.pagina_principal();
 
     }
       public boolean Semestre_vacio() {
-        if (primer_semestre == null) {
+        if (recorer_estudiante().primer_semestre == null) {
             return true;
         } else {
             return false;
         }
 
     }
+      
+      
+      
+      
 }
