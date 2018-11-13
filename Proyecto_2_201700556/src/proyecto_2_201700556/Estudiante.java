@@ -56,7 +56,7 @@ public class Estudiante extends Usuario {
         ultimo_semestre = null;
         
     }
-
+ 
     public String getCarnet() {
         return carnet;
     }
@@ -205,7 +205,7 @@ public class Estudiante extends Usuario {
     public void x()
     {
     Estudiante a=Archivo.estudiante_primero;
-        System.out.println("hola");
+        
         do {
             
             if (a.getCarnet().equals(carnet)) 
