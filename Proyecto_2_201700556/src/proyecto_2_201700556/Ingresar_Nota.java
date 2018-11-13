@@ -5,6 +5,7 @@
  */
 package proyecto_2_201700556;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyecto_2_201700556.dinamico.Login;
@@ -28,11 +29,33 @@ nombre_2=nombre;
     public Ingresar_Nota() {
          
         initComponents( );
-         String data[][] = new String[0][3];
-    String tituloo[] = {"Carnet", "Nombre", "Nota"};
-    tabla_1=new DefaultTableModel(data, tituloo);
+        
+        
+         JButton boton_modificar =new JButton("Modificar Nota");
+         Object data[][] = new Object[1][4];
+         data[0][0]="201700556";
+           data[0][1]="juan";
+             data[0][2]="0";
+              data[0][3]=boton_modificar;
+           tabla.setDefaultRenderer(Object.class, new Render());
+    String tituloo[] = {"Carnet", "Nombre", "Nota","Modificar Nota"};
+       tabla.setRowHeight(30);
+    tabla_1=new DefaultTableModel(data, tituloo)
+          
+            
+                 
+          {
+            @Override
+            public boolean isCellEditable(int filas, int columna) {
+                if (columna >= 0) {
+                    return false;
+                }
+                return super.isCellEditable(filas, columna);
+            }
+        };
 
     this.tabla.setModel(tabla_1);
+    
     }
 
     public String getNombre_2() {
@@ -114,10 +137,29 @@ nombre_2=nombre;
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Codigo", "Nombre", "Nota", "Editar"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabla);
+        if (tabla.getColumnModel().getColumnCount() > 0) {
+            tabla.getColumnModel().getColumn(0).setResizable(false);
+            tabla.getColumnModel().getColumn(1).setResizable(false);
+            tabla.getColumnModel().getColumn(2).setResizable(false);
+            tabla.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         jButton1.setText("BUSCAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -302,6 +344,26 @@ year_curso=(String)combo_year.getSelectedItem();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+int column=tabla.getColumnModel().getColumnIndexAtX(evt.getX());
+ int row=evt.getY()/tabla.getRowHeight();
+        if ( row<tabla.getRowCount()&& row>=0&& column<tabla.getColumnCount()&&column>=0)  
+        {
+            Object Value=tabla.getValueAt(row, column);
+            if (Value instanceof  JButton) 
+            {
+               ( (JButton)Value).doClick();
+               JButton boton=(JButton)Value;
+              
+                
+                {
+                    //eventos para modificar
+                }
+            }
+        }
+        
+    }//GEN-LAST:event_tablaMouseClicked
+
   
     public  void m() {
   
@@ -350,18 +412,31 @@ year_curso=(String)combo_year.getSelectedItem();
          
          Estudiante aux_estudiante=Archivo.estudiante_primero;
          if (aux_estudiante==null) {
+             tabla.setDefaultRenderer(Object.class, new Render());
+            
              
-                String data[][] = new String[contador][3];
-                String tituloo[] = {"Carnet", "Nombre", "Nota"};
-        tabla_1=new DefaultTableModel(data, tituloo);
+                     Object data[][] = new Object[contador][4];
+                String tituloo[] = {"Carnet", "Nombre", "Nota","Modificar Nota"};
+                  tabla.setRowHeight(30);
+        tabla_1=new DefaultTableModel(data, tituloo)     
+          {
+            @Override
+            public boolean isCellEditable(int filas, int columna) {
+                if (columna >= 0) {
+                    return false;
+                }
+                return super.isCellEditable(filas, columna);
+            }
+        };
 
         this.tabla.setModel(tabla_1);
              
          }else{
          do {
-             System.out.println(recorer_semestre(aux_estudiante));
+             // imprime el false 
+            // System.out.println(recorer_semestre(aux_estudiante));
              if (recorer_semestre(aux_estudiante)) {
-                 System.out.println("hola");
+                // System.out.println("hola");
                contador++;
                 
                 
@@ -369,17 +444,20 @@ year_curso=(String)combo_year.getSelectedItem();
              aux_estudiante=aux_estudiante.siguiente;
          } while (aux_estudiante!=Archivo.estudiante_primero&& Archivo.estudiante_primero!=Archivo.estudiante_ultimo);
          
-         
-        String data[][] = new String[contador][3];
+         tabla.setDefaultRenderer(Object.class, new Render());
+        Object data[][] = new Object[contador][4];
         
               do {
-                  System.out.println("recore todo lol");
+                 // System.out.println("recore todo lol");
              if (recorer_semestre(aux_estudiante)) {
-                 System.out.println("encontro al estudiantre");
+                   
+             JButton boton_modificar =new JButton("Modificar Nota");
+                // System.out.println("encontro al estudiantre");
                   data[contador2][0] = "" + aux_estudiante.getCarnet();
                     data[contador2][1] = aux_estudiante.getNombre();
                     Double nota=recorer_semestre_nota(aux_estudiante);
                     data[contador2][2] = ""+nota;
+                    data[contador2][3]=boton_modificar;
                 contador2++;
              }
              aux_estudiante=aux_estudiante.siguiente;
@@ -389,9 +467,23 @@ year_curso=(String)combo_year.getSelectedItem();
         
         
         
-        String tituloo[] = {"Carnet", "Nombre", "Nota"};
-        tabla_1=new DefaultTableModel(data, tituloo);
+        String tituloo[] = {"Carnet", "Nombre", "Nota","Modificar Nota"};
+          tabla.setRowHeight(30);
+        tabla_1=new DefaultTableModel(data, tituloo)
+ 
+          {
+            @Override
+            public boolean isCellEditable(int filas, int columna) {
+                if (columna >= 0) {
+                    return false;
+                }
+                return super.isCellEditable(filas, columna);
+            }
+        };
+       
 
+        
+        
         this.tabla.setModel(tabla_1);
          }
      }
@@ -399,15 +491,23 @@ year_curso=(String)combo_year.getSelectedItem();
 
  
  private boolean recorer_semestre(Estudiante estudiante)
- {
+ {//areglar este metodo
+    
+   // // System.out.println(estudiante.primer_semestre);
+    //(semestre_curso+" y "+year_curso);
      Semestre aux_semestre=estudiante.primer_semestre;
      if (aux_semestre==null) {
+         
          return false;
      }else{
      do 
-     {
+     {//ekl problema es aqui en teoria 
+      //  // System.out.println(aux_semestre.getSemestre());
+        // System.out.println(aux_semestre.getYear());
          if (semestre_curso.equalsIgnoreCase(aux_semestre.getSemestre())&&year_curso.equalsIgnoreCase(aux_semestre.getYear())) 
          {
+            // System.out.println("encontro el semestre ");
+             //posible error????
              if (recorer_cursos(aux_semestre)){return true;}
          }
          
