@@ -24,7 +24,18 @@ public class asignar_curso extends Estudiante{
           /// carnetlab.setText();
     String data[][] = new String[0][8];
     String tituloo[] = {"Codigo", "Curso", "Catedratico", "Credito", "Lab", "Seccion", "Pre-requisito", "Pos-requitito"};
-    tabla_1=new DefaultTableModel(data, tituloo);
+    tabla_1=new DefaultTableModel(data, tituloo)
+            
+          {
+            @Override
+            public boolean isCellEditable(int filas, int columna) {
+                if (columna >= 0) {
+                    return false;
+                }
+                return super.isCellEditable(filas, columna);
+            }
+        };
+       
  
     this.tabla.setModel(tabla_1);
     }
@@ -339,7 +350,7 @@ public class asignar_curso extends Estudiante{
                          
                          
                          
-                         
+                      
                         agregar_semestre(new Semestre(semestre_curso, year_curso));
 
                         
@@ -506,8 +517,30 @@ e.pagina_principal();
     private void combo_semestreItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo_semestreItemStateChanged
 
         String semestre_aux=semestre_curso;
+       
+              semestre_curso = (String) combo_semestre.getSelectedItem();
+         
+         if ("".equals((String) combo_semestre.getSelectedItem()))
+        {
+                 contador_cursos=0;
+             String data[][] = new String[0][8];
+    String tituloo[] = {"Codigo", "Curso", "Catedratico", "Credito", "Lab", "Seccion", "Pre-requisito", "Pos-requitito"};
+    tabla_1=new DefaultTableModel(data, tituloo)
+                 
+          {
+            @Override
+            public boolean isCellEditable(int filas, int columna) {
+                if (columna >= 0) {
+                    return false;
+                }
+                return super.isCellEditable(filas, columna);
+            }
+        };this.tabla.setModel(tabla_1);
+        }
+        
+        
         if (!"".equals((String) combo_semestre.getSelectedItem())&&!"".equals((String) combo_year.getSelectedItem())) {
-            
+            //si  hay semestre 
         
         if (!semestre_curso.equals((String) combo_semestre.getSelectedItem())) {
                    
@@ -549,7 +582,17 @@ e.pagina_principal();
                     contador_cursos=0;
              String data[][] = new String[0][8];
     String tituloo[] = {"Codigo", "Curso", "Catedratico", "Credito", "Lab", "Seccion", "Pre-requisito", "Pos-requitito"};
-    tabla_1=new DefaultTableModel(data, tituloo);
+    tabla_1=new DefaultTableModel(data, tituloo)
+                 
+          {
+            @Override
+            public boolean isCellEditable(int filas, int columna) {
+                if (columna >= 0) {
+                    return false;
+                }
+                return super.isCellEditable(filas, columna);
+            }
+        };
     this.tabla.setModel(tabla_1);
         }
                 
@@ -569,8 +612,24 @@ e.pagina_principal();
 
     private void combo_yearItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo_yearItemStateChanged
     String semestre_aux=year_curso;
-        
-        
+       
+         year_curso = (String) combo_year.getSelectedItem();
+        if ("".equals((String) combo_year.getSelectedItem()))
+        {
+                 contador_cursos=0;
+             String data[][] = new String[0][8];
+    String tituloo[] = {"Codigo", "Curso", "Catedratico", "Credito", "Lab", "Seccion", "Pre-requisito", "Pos-requitito"};
+    tabla_1=new DefaultTableModel(data, tituloo)      
+          {
+            @Override
+            public boolean isCellEditable(int filas, int columna) {
+                if (columna >= 0) {
+                    return false;
+                }
+                return super.isCellEditable(filas, columna);
+            }
+        };   this.tabla.setModel(tabla_1);
+        }
           if (!"".equals((String) combo_semestre.getSelectedItem())&&!"".equals((String) combo_year.getSelectedItem())) {
         if (!year_curso.equals((String) combo_year.getSelectedItem())) {
            
@@ -614,7 +673,16 @@ e.pagina_principal();
                           contador_cursos=0;
              String data[][] = new String[0][8];
     String tituloo[] = {"Codigo", "Curso", "Catedratico", "Credito", "Lab", "Seccion", "Pre-requisito", "Pos-requitito"};
-    tabla_1=new DefaultTableModel(data, tituloo);    this.tabla.setModel(tabla_1);
+    tabla_1=new DefaultTableModel(data, tituloo)     
+          {
+            @Override
+            public boolean isCellEditable(int filas, int columna) {
+                if (columna >= 0) {
+                    return false;
+                }
+                return super.isCellEditable(filas, columna);
+            }
+        };   this.tabla.setModel(tabla_1);
         }
                 
     }//GEN-LAST:event_combo_yearItemStateChanged
@@ -808,7 +876,16 @@ e.pagina_principal();
             }
         }
     String tituloo[] = {"Codigo", "Curso", "Catedratico", "Credito", "Lab", "Seccion", "Pre-requisito", "Pos-requitito"};
-    tabla_1=new DefaultTableModel(data, tituloo);
+    tabla_1=new DefaultTableModel(data, tituloo)      
+          {
+            @Override
+            public boolean isCellEditable(int filas, int columna) {
+                if (columna >= 0) {
+                    return false;
+                }
+                return super.isCellEditable(filas, columna);
+            }
+        };
 
     this.tabla.setModel(tabla_1);
      
