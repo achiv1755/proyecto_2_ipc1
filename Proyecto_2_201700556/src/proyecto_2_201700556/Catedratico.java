@@ -24,6 +24,7 @@ public class Catedratico extends Usuario
 {
     public Catedratico siguiente;
     public Catedratico(){}
+    static String nombre_catedratico="";
 public Catedratico (String nombre, String password)
 {
  
@@ -59,8 +60,17 @@ public void enlazarsiguiente(Catedratico siguiente){this.siguiente=siguiente;}
     
     public void pagina_principal()
     {
-        System.out.println(nombre);
-        System.out.println(password);
+        
+        
+        if (   nombre_catedratico==""&&nombre!=null)
+        {
+               nombre_catedratico=nombre;
+        }
+        if (nombre_catedratico!=nombre&&nombre!=null) {
+            nombre_catedratico=nombre;
+        }
+        //System.out.println(nombre);
+        //System.out.println(password);
         JFrame marco=new JFrame("CATEDRATICO");
         JPanel panel=new JPanel();
         JLabel log_out=new JLabel("LOG OUT");
@@ -93,8 +103,8 @@ public void enlazarsiguiente(Catedratico siguiente){this.siguiente=siguiente;}
                 marco.setVisible(false);
                Ingresar_Nota a=new Ingresar_Nota(nombre);
                
-                  //  System.out.println("el nombre es:"+ nombre);
-                //System.out.println(nombre);
+                  //  //System.out.println("el nombre es:"+ nombre);
+                ////System.out.println(nombre);
                
                 a.m();
             }
