@@ -15,6 +15,7 @@ public class asignar_curso extends Estudiante{
    
     DefaultTableModel tabla_1;
        String carnet_2="";
+        int contador_pre=0;
     
     public asignar_curso() {
  
@@ -331,32 +332,13 @@ public class asignar_curso extends Estudiante{
 
                       //se crea el semestre
                       
-                      
-                      
-                      
-                      
                          aux_estudiante=recorer_estudiante();
-                         
-                         
-                         
-                         
-                         
-                         
-                         
-                      
-                        agregar_semestre(new Semestre(semestre_curso, year_curso));
+                        
+                
+                        agregar_semestre(new Semestre(semestre_curso, year_curso)); }
 
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        //se crea el curso
-                    }
-
+                   
+                   
                     Semestre aux_de_semestre2 = buscar_semestre(year_curso, semestre_curso);
                     if (aux_de_semestre2 != null) {
                         semestre_buscado = buscar_semestre(year_curso, semestre_curso);
@@ -364,7 +346,18 @@ public class asignar_curso extends Estudiante{
 
                         Curso aux_curso_encontrado = buscar_curso(Curso_curso);
 
-                        aux_de_semestre2.curso_agregar_final(aux_curso_encontrado);
+                        
+                        //aca se agrega el mamon 
+                        recorer_estudiantes();
+                        if (  !recorer_estudiantes() ) 
+                        {
+                            if (recorer_estudiantes_precredito(aux_curso_encontrado)) 
+                            {
+                                aux_de_semestre2.curso_agregar_final(aux_curso_encontrado);
+                            }else{JOptionPane.showMessageDialog(null, "le faltan pre requisitos", "ALERTA", JOptionPane.WARNING_MESSAGE);}
+                        
+                        //aca se deve validar los pre creditos gg
+                        }else{JOptionPane.showMessageDialog(null, "ya se asigno a este curso", "ALERTA", JOptionPane.WARNING_MESSAGE);}
                         //contador_cursos++;
                         // aux_de_semestre.setCantidad_de_cursos(contador_cursos);
 
@@ -693,8 +686,7 @@ e.pagina_principal();
    
     public  void m(String carnet ) {
        carnet_2=carnet;
-        //System.out.println(carnet);
-        //System.out.println(carnet_2);
+        
        
          
         
@@ -911,6 +903,228 @@ e.pagina_principal();
     }
       
       
-      
-      
+private boolean recorer_estudiantes()
+{
+Estudiante aux_estudiante=Archivo.estudiante_primero;
+    if (aux_estudiante==null)
+    {
+         return false;
+      //  tabla_vacia();
+    }else
+    {
+        //recorer cada estudiante
+        do {
+            
+            //recorrer cada semestre 
+            if (aux_estudiante.getCarnet().equals(nombre_del_usuario)) {
+                
+                if ( recorer_semestre(aux_estudiante)) 
+                {
+                    return true;
+                }
+            }
+             
+            aux_estudiante=aux_estudiante.siguiente;
+        } while (aux_estudiante!=Archivo.estudiante_primero&&Archivo.estudiante_primero!=Archivo.estudiante_ultimo);
+        
+    
+    
+    
+    }return  false;
+    
+
+
+}
+private boolean recorer_semestre(Estudiante estudiante_actual)
+{
+  Semestre aux_semestre=estudiante_actual.primer_semestre;
+    if (aux_semestre==null)
+    {
+       return false; //tabla_vacia();
+    }else
+    {
+    //recorer cada semestre
+        do {
+            if (aux_semestre.getSemestre().equalsIgnoreCase(semestre_curso)&&aux_semestre.getYear().equalsIgnoreCase(year_curso))
+            {
+                //si se encontro el semestre que se busca     
+                // recorer cada curso
+                if (recorer_curso(aux_semestre,estudiante_actual) )
+                {
+                    return true;
+                }
+ 
+                 
+                
+            }
+            aux_semestre=aux_semestre.siguiente_semestre;
+        } while (aux_semestre!=estudiante_actual.primer_semestre&&estudiante_actual.primer_semestre!=estudiante_actual.ultimo_semestre);
+        
+    
+    } return false;
+
+
+
+}
+private boolean recorer_curso(Semestre semestre_actual,Estudiante estudiante_actual)
+{
+Curso aux_curso=semestre_actual.primer_curso;
+Estudiante aux_estudiante=estudiante_actual;
+    if (aux_curso==null) 
+    {return false;}else
+    {
+    //recorer todos los cursos 
+        do {
+           
+            
+            if (aux_curso.getNombre().equalsIgnoreCase(Curso_curso)) 
+            {
+                
+                return true;
+            }
+            
+            aux_curso=aux_curso.siguiente;
+        } while (aux_curso!=semestre_actual.primer_curso&&semestre_actual.primer_curso!=semestre_actual.ultimo_curso);
+        
+    
+    }return false;
+    
+    
+}
+
+
+
+
+
+
+
+
+      private boolean recorer_estudiantes_precredito(Curso curso)
+{
+Estudiante aux_estudiante=Archivo.estudiante_primero;
+    if (aux_estudiante==null)
+    {
+         return false;
+      //  tabla_vacia();
+    }else
+    {
+        //recorer cada estudiante
+        do {
+            
+            //recorrer cada semestre 
+            if (aux_estudiante.getCarnet().equals(nombre_del_usuario)) {
+                
+                if ( recorer_semestre_precredito(aux_estudiante,curso)) 
+                {
+                    return true;
+                }
+            }
+             
+            aux_estudiante=aux_estudiante.siguiente;
+        } while (aux_estudiante!=Archivo.estudiante_primero&&Archivo.estudiante_primero!=Archivo.estudiante_ultimo);
+        
+    
+    
+    
+    }return  false;
+    
+
+
+}
+      private boolean recorer_semestre_precredito(Estudiante estudiante_actual,Curso curso)
+{
+    
+    
+    String precredito=curso.getPre_credito();
+     if (precredito.equals(" "))
+     {
+     return true;   
+    }
+    String data[]=precredito.split("\\,");
+          contador_pre=0;
+         
+         //System.out.println(data.length);
+    for (int i = 0; i < data.length; i++)
+    {
+        
+        
+        
+        
+    
+    
+  Semestre aux_semestre=estudiante_actual.primer_semestre;
+  
+    if (aux_semestre==null)
+    {
+       return false; //tabla_vacia();
+    }else
+    {
+    //recorer cada semestre
+        do {
+            
+                  
+                // recorer cada curso
+                if (recorer_curso_pre(aux_semestre,data[i]) )
+                {
+                  contador_pre++;
+                }
+ 
+                 
+                
+           
+            aux_semestre=aux_semestre.siguiente_semestre;
+        } while (aux_semestre!=estudiante_actual.primer_semestre&&estudiante_actual.primer_semestre!=estudiante_actual.ultimo_semestre);
+        
+    
+    } 
+    
+    //quiero que aca salga true
+    
+    
+    }
+     
+    if (contador_pre==data.length)
+    {
+    return true;
+    }
+    return false;
+
+
+
+}
+      private boolean recorer_curso_pre(Semestre semestre,String pre_curso)
+      {
+          Curso aux=semestre.primer_curso;
+          if (aux ==null)
+          {
+           return false;
+          }else
+          {
+          
+              do {
+                
+                  if (pre_curso.equals(""+aux.getCodigo())) 
+                  {
+                      
+                      if (aux.isEstado()) 
+                      {
+                           
+                                return true; 
+                      }
+                      
+            
+                  }
+                  
+                  aux=aux.siguiente;
+              } while (aux!=semestre.primer_curso&&semestre.primer_curso!=semestre.ultimo_curso);
+              
+          
+          
+          }
+          
+          
+          
+          
+          return false;
+      }
 }
