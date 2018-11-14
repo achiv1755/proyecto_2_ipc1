@@ -92,8 +92,9 @@ public class Admin extends Usuario {
             @Override
 
             public void actionPerformed(ActionEvent e) {
-
-                System.out.println("hola");
+                marco.setVisible(false);
+              Estadistica estadistica=new Estadistica();
+               estadistica.estadistica();
 
             }
         };
