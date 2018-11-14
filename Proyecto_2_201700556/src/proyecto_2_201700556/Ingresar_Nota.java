@@ -30,13 +30,9 @@ nombre_2=nombre;
          
         initComponents( );
         
-        
-         JButton boton_modificar =new JButton("Modificar Nota");
-         Object data[][] = new Object[1][4];
-         data[0][0]="201700556";
-           data[0][1]="juan";
-             data[0][2]="0";
-              data[0][3]=boton_modificar;
+       
+         Object data[][] = new Object[0][4];
+         
            tabla.setDefaultRenderer(Object.class, new Render());
     String tituloo[] = {"Carnet", "Nombre", "Nota","Modificar Nota"};
        tabla.setRowHeight(30);
@@ -61,14 +57,7 @@ nombre_2=nombre;
     public String getNombre_2() {
         return nombre_2;
     }
-//    public void ingresarnombre(String nombre)
-//{System.out.println(nombre);
-//nombre_2=nombre;
-//    
-//   
-//      
-//m( );
-//}
+ 
 
     public void setNombre_2(String nombre_2) {
         this.nombre_2 = nombre_2;
@@ -100,6 +89,9 @@ nombre_2=nombre;
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("INGRESAR NOTA");
+        setLocation(new java.awt.Point(200, 50));
+        setResizable(false);
 
         jLabel1.setText("INGRESAR NOTAS");
 
@@ -262,7 +254,7 @@ nombre_2=nombre;
                             .addComponent(jLabel5)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -274,7 +266,7 @@ nombre_2=nombre;
         if (!Archivo.curso_vacio()) {
             Curso aux = Archivo.curso_primero;
             do {
-                if  (nombre_2.equalsIgnoreCase(aux.getCatedratico())){
+                if  (nombre_catedratico.equalsIgnoreCase(aux.getCatedratico())){
                     combo_curso.addItem(aux.getNombre());}
                 aux = aux.siguiente;
             } while (Archivo.curso_primero != aux);
@@ -354,10 +346,26 @@ int column=tabla.getColumnModel().getColumnIndexAtX(evt.getX());
             {
                ( (JButton)Value).doClick();
                JButton boton=(JButton)Value;
-              
+              Object codigo=tabla.getValueAt(row, column-3);
+              Object nombre=tabla.getValueAt(row, column-2);
                 
                 {
                     //eventos para modificar
+                    try{
+                   String respuesta = JOptionPane.showInputDialog("Ingrese nota");
+                   Double info=Double.valueOf(respuesta);
+                   //ingrese el 100 ver si esta bueno o no :v
+                    if (info>=0&& info<=100) 
+                    {
+                        tabla.setValueAt(info, row, column-1);
+                        ingresar_nota(info,nombre,codigo);
+                    }else
+                    {
+                    
+                    JOptionPane.showMessageDialog(null, "Ingreso De Nota Erroneo ", "ERROR", JOptionPane.WARNING_MESSAGE);
+                    }
+                    
+                    }catch(Exception e){JOptionPane.showMessageDialog(null, "No Se Permite Texto", "ERROR", JOptionPane.WARNING_MESSAGE);}
                 }
             }
         }
@@ -434,9 +442,9 @@ int column=tabla.getColumnModel().getColumnIndexAtX(evt.getX());
          }else{
          do {
              // imprime el false 
-            // System.out.println(recorer_semestre(aux_estudiante));
+           
              if (recorer_semestre(aux_estudiante)) {
-                // System.out.println("hola");
+           
                contador++;
                 
                 
@@ -448,11 +456,11 @@ int column=tabla.getColumnModel().getColumnIndexAtX(evt.getX());
         Object data[][] = new Object[contador][4];
         
               do {
-                 // System.out.println("recore todo lol");
+               
              if (recorer_semestre(aux_estudiante)) {
                    
              JButton boton_modificar =new JButton("Modificar Nota");
-                // System.out.println("encontro al estudiantre");
+             
                   data[contador2][0] = "" + aux_estudiante.getCarnet();
                     data[contador2][1] = aux_estudiante.getNombre();
                     Double nota=recorer_semestre_nota(aux_estudiante);
@@ -492,9 +500,7 @@ int column=tabla.getColumnModel().getColumnIndexAtX(evt.getX());
  
  private boolean recorer_semestre(Estudiante estudiante)
  {//areglar este metodo
-    
-   // // System.out.println(estudiante.primer_semestre);
-    //(semestre_curso+" y "+year_curso);
+ 
      Semestre aux_semestre=estudiante.primer_semestre;
      if (aux_semestre==null) {
          
@@ -502,12 +508,10 @@ int column=tabla.getColumnModel().getColumnIndexAtX(evt.getX());
      }else{
      do 
      {//ekl problema es aqui en teoria 
-      //  // System.out.println(aux_semestre.getSemestre());
-        // System.out.println(aux_semestre.getYear());
+       
          if (semestre_curso.equalsIgnoreCase(aux_semestre.getSemestre())&&year_curso.equalsIgnoreCase(aux_semestre.getYear())) 
          {
-            // System.out.println("encontro el semestre ");
-             //posible error????
+           
              if (recorer_cursos(aux_semestre)){return true;}
          }
          
@@ -540,7 +544,7 @@ int column=tabla.getColumnModel().getColumnIndexAtX(evt.getX());
      do 
      {
          if (semestre_curso.equalsIgnoreCase(aux_semestre.getSemestre())&&year_curso.equalsIgnoreCase(aux_semestre.getYear())) 
-         {
+         { 
            return  recorer_cursos_nota(aux_semestre);
          }
          
@@ -555,6 +559,7 @@ int column=tabla.getColumnModel().getColumnIndexAtX(evt.getX());
      Curso aux_curso=semestre.primer_curso;
      do {
          if (Curso_curso.equalsIgnoreCase(aux_curso.getNombre())) {
+             
              return  aux_curso.getNota();
          }
          aux_curso=aux_curso.siguiente;
@@ -563,4 +568,102 @@ int column=tabla.getColumnModel().getColumnIndexAtX(evt.getX());
  
  return 0.0;
  }
+ private void ingresar_nota(Double nota ,Object nombre ,Object carnet)
+ {
+     
+     
+  Estudiante aux_estudiante=Archivo.estudiante_primero;
+         if (aux_estudiante==null) {}else
+         {
+             //recorer estudiantes
+             do {
+                 if (aux_estudiante.getCarnet().equalsIgnoreCase((String)carnet)&&aux_estudiante.getNombre().equalsIgnoreCase((String)nombre))
+                 { 
+                 //recorer los semestres  para ver si existe el semestre 
+                   
+                    Semestre semestre_encontrado= recorer_semestre_2(aux_estudiante);
+                    Curso  curso_encontrado= recorer_curso_2(semestre_encontrado);
+                     
+                    curso_encontrado.setNota(nota);
+                     if (nota>=61) 
+                     {
+ 
+                        curso_encontrado.setEstado(true);
+                         
+                     }else{ curso_encontrado.setEstado(false);}
+ 
+                    
+                 }
+                 
+                 
+                 aux_estudiante=aux_estudiante.siguiente;
+             }while (aux_estudiante!=Archivo.estudiante_primero&& Archivo.estudiante_primero!=Archivo.estudiante_ultimo);
+             
+       
+    
+         
+             
+         }  
+     
+     
+     
+     
+     
+     
+     
+     
+
+     
+     
+ 
+ 
+ }
+   private Semestre recorer_semestre_2(Estudiante estudiante)
+ {
+     Semestre aux_semestre=estudiante.primer_semestre;
+     if (aux_semestre==null) 
+     {
+     return null;
+     }else{
+     do 
+     {
+         if (semestre_curso.equalsIgnoreCase(aux_semestre.getSemestre())&&year_curso.equalsIgnoreCase(aux_semestre.getYear())) 
+         {
+           return  aux_semestre;
+         }
+         
+         aux_semestre=aux_semestre.siguiente_semestre;
+         
+     } while (aux_semestre!=estudiante.primer_semestre&&estudiante.primer_semestre!=estudiante.ultimo_semestre);}
+     return null;
+ 
+ }
+   private Curso recorer_curso_2(Semestre semestre_encontrado)
+   {
+       Curso aux_curso=semestre_encontrado.primer_curso;
+       
+       if (aux_curso==null) 
+       {
+        return null;
+       }else
+       {
+           do {
+               
+               if (aux_curso.getNombre().equalsIgnoreCase(Curso_curso) )
+               {
+                 return aux_curso;
+               }
+               
+               
+               aux_curso=aux_curso.siguiente;
+           } while (aux_curso!=semestre_encontrado.primer_curso&&semestre_encontrado.primer_curso!=semestre_encontrado.ultimo_curso);
+           
+       
+       
+       }
+       
+       
+       
+   return null;
+   }
 }

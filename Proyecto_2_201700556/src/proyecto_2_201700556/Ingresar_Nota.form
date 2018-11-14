@@ -3,6 +3,11 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="INGRESAR NOTA"/>
+    <Property name="location" type="java.awt.Point" editor="org.netbeans.beaninfo.editors.PointEditor">
+      <Point value="[200, 50]"/>
+    </Property>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -116,7 +121,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="321" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -243,7 +248,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="combo_cursoActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="Archivo Archivo=new Archivo();&#xa;if (!Archivo.curso_vacio()) {&#xa;            Curso aux = Archivo.curso_primero;&#xa;            do {&#xa;                if  (nombre_2.equalsIgnoreCase(aux.getCatedratico())){&#xa;               combo_curso.addItem(aux.getNombre());}&#xa;                aux = aux.siguiente;&#xa;            } while (Archivo.curso_primero != aux);&#xa;        }"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="Archivo Archivo=new Archivo();&#xa;if (!Archivo.curso_vacio()) {&#xa;            Curso aux = Archivo.curso_primero;&#xa;            do {&#xa;                if  (nombre_catedratico.equalsIgnoreCase(aux.getCatedratico())){&#xa;               combo_curso.addItem(aux.getNombre());}&#xa;                aux = aux.siguiente;&#xa;            } while (Archivo.curso_primero != aux);&#xa;        }"/>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
