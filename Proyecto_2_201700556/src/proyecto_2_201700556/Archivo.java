@@ -199,7 +199,7 @@ public Archivo ()
     
                 }else{JOptionPane.showMessageDialog(null, "Archivo no valido");Admin Administrador=new Admin();Administrador.add();}}   else{Admin Administrador=new Admin();
     Administrador.add();}
-}catch (Exception c){JOptionPane.showMessageDialog(null, "archivo no valido"+ c);Admin Administrador=new Admin();
+}catch (Exception c){JOptionPane.showMessageDialog(null, "archivo no valido");Admin Administrador=new Admin();
     Administrador.add();}}
 
 
@@ -307,7 +307,7 @@ public void curso_leer()
     
                 }else{JOptionPane.showMessageDialog(null, "Archivo no valido");Admin Administrador=new Admin();Administrador.add();}}   else{Admin Administrador=new Admin();
     Administrador.add();}
-}catch (Exception c){JOptionPane.showMessageDialog(null, "archivo no valido"+ c);Admin Administrador=new Admin();
+}catch (Exception c){JOptionPane.showMessageDialog(null, "archivo no valido");Admin Administrador=new Admin();
     Administrador.add();}
     
 
