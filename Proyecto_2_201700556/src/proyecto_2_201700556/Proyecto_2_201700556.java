@@ -13,21 +13,10 @@ import proyecto_2_201700556.dinamico.Login;
  */
 public class Proyecto_2_201700556 {
 
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String[] args) {
         
-        
-        
-  //  Admin a=new Admin();
-  // a.add();
-   // Catedratico a=new Catedratico("neftali","neftali");
-  //a.pagina_principal();
-  
-//Estudiante e=new Estudiante ("1","1","1","1","1",1,"1");
-   
-    //e.pagina_principal();
+ 
     
     
 Login login=new Login();
