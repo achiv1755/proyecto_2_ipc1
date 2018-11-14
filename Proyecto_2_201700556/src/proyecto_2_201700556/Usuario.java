@@ -5,11 +5,13 @@
  */
 package proyecto_2_201700556;
 
+import javax.swing.*;
+
 /**
  *
  * @author juare
  */
-public class Usuario { 
+public class Usuario extends JFrame{ 
     String carnet;
     String DPI;
     String nombre;
