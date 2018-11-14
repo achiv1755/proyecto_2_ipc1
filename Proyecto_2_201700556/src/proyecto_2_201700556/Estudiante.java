@@ -22,7 +22,8 @@ public class Estudiante extends Usuario {
     String year_curso = "";
     String semestre_curso = "";
     String Curso_curso = "";
-    
+ 
+    static String nombre_del_usuario="";
     int contador_cursos = 0;
     Semestre semestre_buscado;
     JFrame marco2 = new JFrame();
@@ -31,7 +32,7 @@ public class Estudiante extends Usuario {
      public Semestre ultimo_semestre;
     public int semestre_tamano;
     JPanel pintar = new JPanel();
-      JPanel pintar_tabla = new JPanel();
+    JPanel pintar_tabla = new JPanel();
     public Estudiante siguiente;
     public Estudiante anterior;
    
@@ -40,6 +41,9 @@ public class Estudiante extends Usuario {
 
     public Estudiante() {
     }
+
+   
+    
 
     public Estudiante(String carnet, String DPI, String nombre, String correo, String direccion, int Credito, String password) {
         this.carnet = carnet;
@@ -132,7 +136,13 @@ public class Estudiante extends Usuario {
     }
 
     public void pagina_principal() {
-
+        if (   nombre_del_usuario==""&&carnet!=null)
+        {
+               nombre_del_usuario=carnet;
+        }
+        if (nombre_del_usuario!=carnet&&carnet!=null) {
+            nombre_del_usuario=carnet;
+        }
         JFrame marco = new JFrame("USUARIO");
         JPanel pintar2_0 = new JPanel();
         JLabel titulo = new JLabel("USUARIO");
@@ -169,8 +179,12 @@ public class Estudiante extends Usuario {
             @Override
 
             public void actionPerformed(ActionEvent e) {
-                //marco.setVisible(false);
-                  x();
+                marco.setVisible(false);
+                  
+                Curso_Aprobado a=new Curso_Aprobado();
+                a.setCarnet_3(carnet);
+                a.ver_curso_aprobado(carnet);
+                   
             }
         };
 
@@ -179,10 +193,12 @@ public class Estudiante extends Usuario {
 
             public void actionPerformed(ActionEvent e) {
                 marco.setVisible(false);
-                asignar_curso asignar_curso=new asignar_curso( );
+              
             
-                
-                asignar_curso.setCarnet_2(carnet);
+           
+                   asignar_curso asignar_curso=new asignar_curso( );
+                //asignar_curso.setCarnet_2(carnet);
+                //System.out.println(carnet);
                 asignar_curso.m( carnet);
  
               
@@ -202,36 +218,10 @@ public class Estudiante extends Usuario {
 
     }
      
-    public void x()
-    {
-    Estudiante a=Archivo.estudiante_primero;
-        
-        do {
-            
-            if (a.getCarnet().equals(carnet)) 
-            {
-                Semestre b=a.primer_semestre;
-                do {
-                    
-                      System.out.println(b.getSemestre()+"  "+b.getYear()+"  "+b.getCurso_tamano());  
-                   
-                    
-                    
-                    b=b.siguiente_semestre;
-                } while (b!=a.primer_semestre&&a.primer_semestre!=a.ultimo_semestre);
-                
-                
-                
-            }
-            
-            
-            
-            
-            
-            a=a.siguiente;
-        } while (a!=Archivo.estudiante_primero&&Archivo.estudiante_primero!=Archivo.estudiante_ultimo);
-        
+   
     
-    
-    }
 }
+        
+        
+        
+    
