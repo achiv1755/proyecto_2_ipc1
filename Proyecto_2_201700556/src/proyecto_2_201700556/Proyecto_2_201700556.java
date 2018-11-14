@@ -5,7 +5,7 @@
  */
 
 package proyecto_2_201700556;
-import proyecto_2_201700556.dinamico.Administrador;
+ 
 import proyecto_2_201700556.dinamico.Login;
 /**
  *
@@ -20,10 +20,18 @@ public class Proyecto_2_201700556 {
         
         
         
-    Administrador a=new Administrador();
-    a.add();
-//Login login=new Login();
-      // login.buscar();
+  //  Admin a=new Admin();
+  // a.add();
+   // Catedratico a=new Catedratico("neftali","neftali");
+  //a.pagina_principal();
+  
+//Estudiante e=new Estudiante ("1","1","1","1","1",1,"1");
+   
+    //e.pagina_principal();
+    
+    
+Login login=new Login();
+     login.buscar();
     }
     
 }
