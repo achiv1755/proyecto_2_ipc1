@@ -351,10 +351,14 @@ public class asignar_curso extends Estudiante{
                         recorer_estudiantes();
                         if (  !recorer_estudiantes() ) 
                         {
+                            if (recorer_semestre_1(aux_estudiante,Curso_curso)) {
+                                JOptionPane.showMessageDialog(null, "Ya Aprobo este curso", "ALERTA", JOptionPane.WARNING_MESSAGE);
+                            }else{
                             if (recorer_estudiantes_precredito(aux_curso_encontrado)) 
                             {
+                                //calidar aca
                                 aux_de_semestre2.curso_agregar_final(aux_curso_encontrado);
-                            }else{JOptionPane.showMessageDialog(null, "le faltan pre requisitos", "ALERTA", JOptionPane.WARNING_MESSAGE);}
+                            }else{JOptionPane.showMessageDialog(null, "le faltan pre requisitos", "ALERTA", JOptionPane.WARNING_MESSAGE);}}
                         
                         //aca se deve validar los pre creditos gg
                         }else{JOptionPane.showMessageDialog(null, "ya se asigno a este curso", "ALERTA", JOptionPane.WARNING_MESSAGE);}
@@ -1127,4 +1131,82 @@ Estudiante aux_estudiante=Archivo.estudiante_primero;
           
           return false;
       }
+      
+private boolean recorer_semestre_1(Estudiante estudiante_actual,String curso)
+{
+
+  Semestre aux_semestre=estudiante_actual.primer_semestre;
+  
+    if (aux_semestre==null)
+    {
+       return false; //tabla_vacia();
+    }else
+    {
+    //recorer cada semestre
+        do {
+            
+                  
+                // recorer cada curso
+                if (recorer_curso3(aux_semestre,curso) )
+                {
+                 return true;
+                }
+ 
+                 
+                
+           
+            aux_semestre=aux_semestre.siguiente_semestre;
+        } while (aux_semestre!=estudiante_actual.primer_semestre&&estudiante_actual.primer_semestre!=estudiante_actual.ultimo_semestre);
+        
+    
+    } 
+    
+    //quiero que aca salga true
+    
+    
+return false;
+    }
+ 
+
+      private boolean recorer_curso3(Semestre semestre,String curso)
+      {
+          Curso aux=semestre.primer_curso;
+          if (aux ==null)
+          {
+           return false;
+          }else
+          {
+          
+              do {
+                
+                  if (curso.equals(""+aux.getNombre())) 
+                  {
+                      
+                      if (aux.isEstado()) 
+                      {
+                           
+                                return true; 
+                      }
+                      
+            
+                  }
+                  
+                  aux=aux.siguiente;
+              } while (aux!=semestre.primer_curso&&semestre.primer_curso!=semestre.ultimo_curso);
+              
+          
+          
+          }
+          
+          
+          
+          
+          return false;
+      }
+
+      
+      
+      
+      
+      
 }
